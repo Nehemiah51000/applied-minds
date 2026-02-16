@@ -1,5 +1,15 @@
+import Link from 'next/link';
+
+import { Button } from '@/components/ui/button';
+
 function CoursesPage() {
-  return <div>this is the courses page</div>;
+  return (
+    <div>
+      <Link href='/teacher/create'>
+        <Button>New Course</Button>
+      </Link>
+    </div>
+  );
 }
 
 export default CoursesPage;

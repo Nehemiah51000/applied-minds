@@ -1,6 +1,6 @@
 'use client';
 
-import { usePathname, useRouter } from 'next/navigation';
+import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import { UserButton } from '@clerk/nextjs';
 import { LogOut } from 'lucide-react';
@@ -9,7 +9,6 @@ import { Button } from './ui/button';
 
 function NavBarRoutes() {
   const pathname = usePathname();
-  const router = useRouter();
 
   const isTeacherPage = pathname?.startsWith('/teacher');
   const isPlayerPage = pathname?.startsWith('/chapter');
