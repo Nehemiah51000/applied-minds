@@ -4,6 +4,7 @@ import { db } from '@/lib/db';
 import { auth } from '@clerk/nextjs/server';
 import IconBadge from '@/components/IconBadge';
 import { LayoutDashboard } from 'lucide-react';
+import TitleForm from './_components/TitleForm';
 
 async function CourseIdPage({
   params,
@@ -54,6 +55,7 @@ async function CourseIdPage({
             <IconBadge icon={LayoutDashboard} />
             <h2 className='text-xl'>Customize your course</h2>
           </div>
+          <TitleForm initialData={course} courseId={course.id} />
         </div>
       </div>
     </div>
