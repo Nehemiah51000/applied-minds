@@ -1,13 +1,14 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
 import * as z from 'zod';
 import axios from 'axios';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { useState } from 'react';
+import toast from 'react-hot-toast';
 
 import { Pencil } from 'lucide-react';
-
 import { Button } from '@/components/ui/button';
 import {
   Form,
@@ -41,8 +42,19 @@ function TitleForm({ initialData, courseId }: ITittleFormProps) {
   const { isSubmitting, isValid } = form.formState;
 
   const toggleEdit = () => setIsEditing(!isEditing);
+  const router = useRouter();
   const handleSubmit = async (values: z.infer<typeof formSchema>) => {
-    console.log(values);
+    try {
+      await axios.patch(`/api/courses/${courseId}`, values);
+
+      toast.success('Title updated successfully');
+      toggleEdit();
+      router.refresh();
+    } catch (error) {
+      console.log(error);
+
+      toast.error('Failed to update title. Please try again!');
+    }
   };
   return (
     <div className='mt-6 border bg-slate-100 rounded-md p-4'>
