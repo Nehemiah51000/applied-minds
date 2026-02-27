@@ -1,5 +1,6 @@
 'use client';
 
+import { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import { UserButton } from '@clerk/nextjs';
@@ -9,9 +10,15 @@ import { Button } from './ui/button';
 
 function NavBarRoutes() {
   const pathname = usePathname();
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   const isTeacherPage = pathname?.startsWith('/teacher');
   const isPlayerPage = pathname?.startsWith('/chapter');
+
   return (
     <div className='flex gap-x-2 ml-auto'>
       {isTeacherPage || isPlayerPage ? (
@@ -28,7 +35,7 @@ function NavBarRoutes() {
           </Button>
         </Link>
       )}
-      <UserButton afterSignOutUrl='/' />
+      {isMounted && <UserButton afterSignOutUrl='/' />}
     </div>
   );
 }
