@@ -11,6 +11,7 @@ export async function PATCH(
     const { userId } = await auth();
     const values = await req.json();
     const { courseId } = await params;
+    console.log(values);
 
     if (!userId) {
       return new NextResponse('Unauthorized access', { status: 401 });
