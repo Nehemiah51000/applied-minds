@@ -2,9 +2,9 @@
 
 import { useRouter } from 'next/navigation';
 import Image from 'next/image';
+import z from 'zod';
 import { useState } from 'react';
 import axios from 'axios';
-import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
 import { ImageIcon, Pencil, PlusCircle } from 'lucide-react';
 
@@ -26,7 +26,6 @@ const formSchema = z.object({
 
 function ImageForm({ initialData, courseId }: IImageFormProps) {
   const [isEditing, setIsEditing] = useState(false);
-
 
   const toggleEdit = () => setIsEditing(!isEditing);
   const router = useRouter();
