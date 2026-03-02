@@ -1,18 +1,16 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import * as z from 'zod';
-import axios from 'axios';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useForm } from 'react-hook-form';
+import Image from 'next/image';
 import { useState } from 'react';
+import axios from 'axios';
+import { useForm } from 'react-hook-form';
 import toast from 'react-hot-toast';
+import { ImageIcon, Pencil, PlusCircle } from 'lucide-react';
+
 import { Course } from '@/app/generated/prisma/client';
 
-import { ImageIcon, Pencil, PlusCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-
-import Image from 'next/image';
 import FileUpload from '@/components/FileUpload';
 
 interface IImageFormProps {
@@ -29,13 +27,6 @@ const formSchema = z.object({
 function ImageForm({ initialData, courseId }: IImageFormProps) {
   const [isEditing, setIsEditing] = useState(false);
 
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
-    defaultValues: {
-      imageUrl: initialData.imageUrl || '',
-    },
-  });
-  const { isSubmitting, isValid } = form.formState;
 
   const toggleEdit = () => setIsEditing(!isEditing);
   const router = useRouter();
