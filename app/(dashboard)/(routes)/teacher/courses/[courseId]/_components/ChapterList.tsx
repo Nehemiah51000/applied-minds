@@ -66,7 +66,7 @@ function ChapterList({ onReorder, onEdit, items }: IChapterListProps) {
                     className={cn(
                       'flex items-center gap-x-2 bg-slate-200 border-slate-200 border text-slate-700 rounded-md mb-4 text-sm',
                       chapter.isPublished &&
-                        'bg-sky-100 border-sky-100 text-sky-700',
+                        'bg-orange-100 border-orange-100 text-orange-700',
                     )}
                     {...provided.draggableProps}
                     ref={provided.innerRef}>
@@ -74,7 +74,7 @@ function ChapterList({ onReorder, onEdit, items }: IChapterListProps) {
                       className={cn(
                         'px-2 py-3 border-r border-r-slate-200 hover:bg-slate-300 rounded-l-md transition',
                         chapter.isPublished &&
-                          'border-r-sky-200 hover:bg-sky-200',
+                          'border-r-orange-200 hover:bg-orange-200',
                       )}
                       {...provided.dragHandleProps}>
                       <Grip className='h-5 w-5' />
@@ -84,7 +84,7 @@ function ChapterList({ onReorder, onEdit, items }: IChapterListProps) {
                       <Badge
                         className={cn(
                           'bg-slate-500',
-                          chapter.isPublished && 'bg-sky-700',
+                          chapter.isPublished && 'bg-orange-700',
                         )}>
                         {chapter.isPublished ? 'Published' : 'Draft'}
                       </Badge>
