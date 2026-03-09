@@ -36,7 +36,7 @@ async function CourseIdPage({
     include: {
       chapters: {
         orderBy: {
-          createdAt: 'asc',
+          position: 'asc',
         },
       },
       attachments: {
