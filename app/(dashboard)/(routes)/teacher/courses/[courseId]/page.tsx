@@ -10,6 +10,7 @@ import DescriptionForm from './_components/DescriptionForm';
 import ImageForm from './_components/ImageForm';
 import CategoryForm from './_components/CategoryForm';
 import AttachmentsForm from './_components/AttachmentsForm';
+import ChapterForm from './_components/ChapterForm';
 
 async function CourseIdPage({
   params,
@@ -33,6 +34,11 @@ async function CourseIdPage({
       id: courseId,
     },
     include: {
+      chapters: {
+        orderBy: {
+          createdAt: 'asc',
+        },
+      },
       attachments: {
         orderBy: {
           createdAt: 'desc',
@@ -50,6 +56,7 @@ async function CourseIdPage({
     course.description,
     course.imageUrl,
     course.categoryId,
+    course.chapters.some((chapter) => chapter.isPublished),
   ];
 
   const totalFields = requiredFields.length;
@@ -91,7 +98,9 @@ async function CourseIdPage({
               <IconBadge icon={ListChecks} />
               <h2 className='text-xl'>Course Chapters</h2>
             </div>
-            <div> TODO: CHAPTERS</div>
+            <div>
+              <ChapterForm initialData={course} courseId={course.id} />
+            </div>
           </div>
           <div>
             <div className='flex items-center gap-x-2'>
