@@ -5,13 +5,12 @@ import z from 'zod';
 import { useState } from 'react';
 import axios from 'axios';
 import toast from 'react-hot-toast';
-import { ImageIcon, Pencil, PlusCircle } from 'lucide-react';
+import { File, Pencil, Loader2, X } from 'lucide-react';
 
 import { Attachment, Course } from '@/app/generated/prisma/client';
 
 import { Button } from '@/components/ui/button';
 import FileUpload from '@/components/FileUpload';
-import Image from 'next/image';
 
 interface IAttachmentsFormProps {
   initialData: Course & { attachments: Attachment[] };
@@ -24,13 +23,34 @@ const formSchema = z.object({
 
 function AttachmentsForm({ initialData, courseId }: IAttachmentsFormProps) {
   const [isEditing, setIsEditing] = useState(false);
+  const [isDeletingId, setIsDeletingId] = useState<string | null>(null);
 
   const toggleEdit = () => setIsEditing(!isEditing);
   const router = useRouter();
+
+  const handleDelete = async (id: string) => {
+    try {
+      setIsDeletingId(id);
+
+      await axios.delete(`/api/courses/${courseId}/attachments/${id}`);
+
+      toast.success('Attachment deleted successfully');
+      toggleEdit();
+      router.refresh();
+    } catch (error) {
+      toast.error(
+        'Something went wrong while deleting the attachment, please try again.',
+      );
+
+      console.log(error);
+    } finally {
+      setIsDeletingId(null);
+    }
+  };
+
   const handleSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
       await axios.post(`/api/courses/${courseId}/attachments`, values);
-      console.log(courseId);
 
       toast.success('Attachment uploaded successfully');
       toggleEdit();
@@ -59,6 +79,33 @@ function AttachmentsForm({ initialData, courseId }: IAttachmentsFormProps) {
         <>
           {initialData.attachments.length === 0 && (
             <p className='text-sm text-slate-500 italic'>No attachments yet</p>
+          )}
+
+          {initialData.attachments.length > 0 && (
+            <div className='space-y-2'>
+              {initialData.attachments.map((attachment) => (
+                <div
+                  key={attachment.id}
+                  className='flex items-center p-3 w-full bg-sky-100 border-sky-200 border text-sky-700 rounded-md'>
+                  <File className='h-4 w-4 mr-2 shrink-0' />
+                  <p className='text-sx line-clamp-1'>{attachment.name}</p>
+
+                  {isDeletingId === attachment.id && (
+                    <div className='ml-auto'>
+                      <Loader2 className='w-4 h-4 animate-spin' />
+                    </div>
+                  )}
+
+                  {isDeletingId !== attachment.id && (
+                    <button
+                      onClick={() => handleDelete(attachment.id)}
+                      className='hover:opacity-75 ml-auto transition'>
+                      <X className='w-4 h-4' />
+                    </button>
+                  )}
+                </div>
+              ))}
+            </div>
           )}
         </>
       )}
