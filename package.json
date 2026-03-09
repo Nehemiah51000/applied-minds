@@ -13,7 +13,7 @@
     "push:db": "pnpm dlx prisma db push",
     "pull:db": "pnpm dlx prisma db pull",
     "seed:db": "pnpm dlx prisma db seed",
-    "generate:db": "pnpm dlx prisma db generate",
+    "generate:db": "pnpm dlx prisma generate",
     "lint": "eslint"
   },
   "dependencies": {
