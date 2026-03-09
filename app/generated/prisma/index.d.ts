@@ -28,6 +28,21 @@ export type Category = $Result.DefaultSelection<Prisma.$CategoryPayload>
  * 
  */
 export type Attachment = $Result.DefaultSelection<Prisma.$AttachmentPayload>
+/**
+ * Model Chapter
+ * 
+ */
+export type Chapter = $Result.DefaultSelection<Prisma.$ChapterPayload>
+/**
+ * Model MuxData
+ * 
+ */
+export type MuxData = $Result.DefaultSelection<Prisma.$MuxDataPayload>
+/**
+ * Model UserProgress
+ * 
+ */
+export type UserProgress = $Result.DefaultSelection<Prisma.$UserProgressPayload>
 
 /**
  * ##  Prisma Client ʲˢ
@@ -35,7 +50,9 @@ export type Attachment = $Result.DefaultSelection<Prisma.$AttachmentPayload>
  * Type-safe database client for TypeScript & Node.js
  * @example
  * ```
- * const prisma = new PrismaClient()
+ * const prisma = new PrismaClient({
+ *   adapter: new PrismaPg({ connectionString: process.env.DATABASE_URL })
+ * })
  * // Fetch zero or more Courses
  * const courses = await prisma.course.findMany()
  * ```
@@ -56,7 +73,9 @@ export class PrismaClient<
    * Type-safe database client for TypeScript & Node.js
    * @example
    * ```
-   * const prisma = new PrismaClient()
+   * const prisma = new PrismaClient({
+   *   adapter: new PrismaPg({ connectionString: process.env.DATABASE_URL })
+   * })
    * // Fetch zero or more Courses
    * const courses = await prisma.course.findMany()
    * ```
@@ -136,7 +155,7 @@ export class PrismaClient<
    * ])
    * ```
    * 
-   * Read more in our [docs](https://www.prisma.io/docs/concepts/components/prisma-client/transactions).
+   * Read more in our [docs](https://www.prisma.io/docs/orm/prisma-client/queries/transactions).
    */
   $transaction<P extends Prisma.PrismaPromise<any>[]>(arg: [...P], options?: { isolationLevel?: Prisma.TransactionIsolationLevel }): $Utils.JsPromise<runtime.Types.Utils.UnwrapTuple<P>>
 
@@ -175,6 +194,36 @@ export class PrismaClient<
     * ```
     */
   get attachment(): Prisma.AttachmentDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.chapter`: Exposes CRUD operations for the **Chapter** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more Chapters
+    * const chapters = await prisma.chapter.findMany()
+    * ```
+    */
+  get chapter(): Prisma.ChapterDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.muxData`: Exposes CRUD operations for the **MuxData** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more MuxData
+    * const muxData = await prisma.muxData.findMany()
+    * ```
+    */
+  get muxData(): Prisma.MuxDataDelegate<ExtArgs, ClientOptions>;
+
+  /**
+   * `prisma.userProgress`: Exposes CRUD operations for the **UserProgress** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more UserProgresses
+    * const userProgresses = await prisma.userProgress.findMany()
+    * ```
+    */
+  get userProgress(): Prisma.UserProgressDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -225,8 +274,8 @@ export namespace Prisma {
   export import Exact = $Public.Exact
 
   /**
-   * Prisma Client JS version: 7.4.0
-   * Query Engine version: ab56fe763f921d033a6c195e7ddeb3e255bdbb57
+   * Prisma Client JS version: 7.4.2
+   * Query Engine version: 94a226be1cf2967af2541cca5529f0f7ba866919
    */
   export type PrismaVersion = {
     client: string
@@ -611,7 +660,10 @@ export namespace Prisma {
   export const ModelName: {
     Course: 'Course',
     Category: 'Category',
-    Attachment: 'Attachment'
+    Attachment: 'Attachment',
+    Chapter: 'Chapter',
+    MuxData: 'MuxData',
+    UserProgress: 'UserProgress'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -627,7 +679,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "course" | "category" | "attachment"
+      modelProps: "course" | "category" | "attachment" | "chapter" | "muxData" | "userProgress"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -853,6 +905,228 @@ export namespace Prisma {
           }
         }
       }
+      Chapter: {
+        payload: Prisma.$ChapterPayload<ExtArgs>
+        fields: Prisma.ChapterFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.ChapterFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ChapterPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.ChapterFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ChapterPayload>
+          }
+          findFirst: {
+            args: Prisma.ChapterFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ChapterPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.ChapterFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ChapterPayload>
+          }
+          findMany: {
+            args: Prisma.ChapterFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ChapterPayload>[]
+          }
+          create: {
+            args: Prisma.ChapterCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ChapterPayload>
+          }
+          createMany: {
+            args: Prisma.ChapterCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.ChapterCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ChapterPayload>[]
+          }
+          delete: {
+            args: Prisma.ChapterDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ChapterPayload>
+          }
+          update: {
+            args: Prisma.ChapterUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ChapterPayload>
+          }
+          deleteMany: {
+            args: Prisma.ChapterDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.ChapterUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.ChapterUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ChapterPayload>[]
+          }
+          upsert: {
+            args: Prisma.ChapterUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$ChapterPayload>
+          }
+          aggregate: {
+            args: Prisma.ChapterAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateChapter>
+          }
+          groupBy: {
+            args: Prisma.ChapterGroupByArgs<ExtArgs>
+            result: $Utils.Optional<ChapterGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.ChapterCountArgs<ExtArgs>
+            result: $Utils.Optional<ChapterCountAggregateOutputType> | number
+          }
+        }
+      }
+      MuxData: {
+        payload: Prisma.$MuxDataPayload<ExtArgs>
+        fields: Prisma.MuxDataFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.MuxDataFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MuxDataPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.MuxDataFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MuxDataPayload>
+          }
+          findFirst: {
+            args: Prisma.MuxDataFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MuxDataPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.MuxDataFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MuxDataPayload>
+          }
+          findMany: {
+            args: Prisma.MuxDataFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MuxDataPayload>[]
+          }
+          create: {
+            args: Prisma.MuxDataCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MuxDataPayload>
+          }
+          createMany: {
+            args: Prisma.MuxDataCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.MuxDataCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MuxDataPayload>[]
+          }
+          delete: {
+            args: Prisma.MuxDataDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MuxDataPayload>
+          }
+          update: {
+            args: Prisma.MuxDataUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MuxDataPayload>
+          }
+          deleteMany: {
+            args: Prisma.MuxDataDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.MuxDataUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.MuxDataUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MuxDataPayload>[]
+          }
+          upsert: {
+            args: Prisma.MuxDataUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$MuxDataPayload>
+          }
+          aggregate: {
+            args: Prisma.MuxDataAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateMuxData>
+          }
+          groupBy: {
+            args: Prisma.MuxDataGroupByArgs<ExtArgs>
+            result: $Utils.Optional<MuxDataGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.MuxDataCountArgs<ExtArgs>
+            result: $Utils.Optional<MuxDataCountAggregateOutputType> | number
+          }
+        }
+      }
+      UserProgress: {
+        payload: Prisma.$UserProgressPayload<ExtArgs>
+        fields: Prisma.UserProgressFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.UserProgressFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserProgressPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.UserProgressFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserProgressPayload>
+          }
+          findFirst: {
+            args: Prisma.UserProgressFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserProgressPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.UserProgressFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserProgressPayload>
+          }
+          findMany: {
+            args: Prisma.UserProgressFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserProgressPayload>[]
+          }
+          create: {
+            args: Prisma.UserProgressCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserProgressPayload>
+          }
+          createMany: {
+            args: Prisma.UserProgressCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.UserProgressCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserProgressPayload>[]
+          }
+          delete: {
+            args: Prisma.UserProgressDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserProgressPayload>
+          }
+          update: {
+            args: Prisma.UserProgressUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserProgressPayload>
+          }
+          deleteMany: {
+            args: Prisma.UserProgressDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.UserProgressUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.UserProgressUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserProgressPayload>[]
+          }
+          upsert: {
+            args: Prisma.UserProgressUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$UserProgressPayload>
+          }
+          aggregate: {
+            args: Prisma.UserProgressAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateUserProgress>
+          }
+          groupBy: {
+            args: Prisma.UserProgressGroupByArgs<ExtArgs>
+            result: $Utils.Optional<UserProgressGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.UserProgressCountArgs<ExtArgs>
+            result: $Utils.Optional<UserProgressCountAggregateOutputType> | number
+          }
+        }
+      }
     }
   } & {
     other: {
@@ -964,6 +1238,9 @@ export namespace Prisma {
     course?: CourseOmit
     category?: CategoryOmit
     attachment?: AttachmentOmit
+    chapter?: ChapterOmit
+    muxData?: MuxDataOmit
+    userProgress?: UserProgressOmit
   }
 
   /* Types for Logging */
@@ -1044,10 +1321,12 @@ export namespace Prisma {
    */
 
   export type CourseCountOutputType = {
+    chapters: number
     attachments: number
   }
 
   export type CourseCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    chapters?: boolean | CourseCountOutputTypeCountChaptersArgs
     attachments?: boolean | CourseCountOutputTypeCountAttachmentsArgs
   }
 
@@ -1060,6 +1339,13 @@ export namespace Prisma {
      * Select specific fields to fetch from the CourseCountOutputType
      */
     select?: CourseCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * CourseCountOutputType without action
+   */
+  export type CourseCountOutputTypeCountChaptersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ChapterWhereInput
   }
 
   /**
@@ -1098,6 +1384,37 @@ export namespace Prisma {
    */
   export type CategoryCountOutputTypeCountCoursesArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: CourseWhereInput
+  }
+
+
+  /**
+   * Count Type ChapterCountOutputType
+   */
+
+  export type ChapterCountOutputType = {
+    userProgress: number
+  }
+
+  export type ChapterCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    userProgress?: boolean | ChapterCountOutputTypeCountUserProgressArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * ChapterCountOutputType without action
+   */
+  export type ChapterCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the ChapterCountOutputType
+     */
+    select?: ChapterCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * ChapterCountOutputType without action
+   */
+  export type ChapterCountOutputTypeCountUserProgressArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: UserProgressWhereInput
   }
 
 
@@ -1302,6 +1619,7 @@ export namespace Prisma {
     createdAt?: boolean
     updatedAt?: boolean
     category?: boolean | Course$categoryArgs<ExtArgs>
+    chapters?: boolean | Course$chaptersArgs<ExtArgs>
     attachments?: boolean | Course$attachmentsArgs<ExtArgs>
     _count?: boolean | CourseCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["course"]>
@@ -1347,6 +1665,7 @@ export namespace Prisma {
   export type CourseOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "title" | "description" | "imageUrl" | "isPublished" | "categoryId" | "createdAt" | "updatedAt", ExtArgs["result"]["course"]>
   export type CourseInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     category?: boolean | Course$categoryArgs<ExtArgs>
+    chapters?: boolean | Course$chaptersArgs<ExtArgs>
     attachments?: boolean | Course$attachmentsArgs<ExtArgs>
     _count?: boolean | CourseCountOutputTypeDefaultArgs<ExtArgs>
   }
@@ -1361,6 +1680,7 @@ export namespace Prisma {
     name: "Course"
     objects: {
       category: Prisma.$CategoryPayload<ExtArgs> | null
+      chapters: Prisma.$ChapterPayload<ExtArgs>[]
       attachments: Prisma.$AttachmentPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
@@ -1768,6 +2088,7 @@ export namespace Prisma {
   export interface Prisma__CourseClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     category<T extends Course$categoryArgs<ExtArgs> = {}>(args?: Subset<T, Course$categoryArgs<ExtArgs>>): Prisma__CategoryClient<$Result.GetResult<Prisma.$CategoryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    chapters<T extends Course$chaptersArgs<ExtArgs> = {}>(args?: Subset<T, Course$chaptersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ChapterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     attachments<T extends Course$attachmentsArgs<ExtArgs> = {}>(args?: Subset<T, Course$attachmentsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AttachmentPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -2219,6 +2540,30 @@ export namespace Prisma {
      */
     include?: CategoryInclude<ExtArgs> | null
     where?: CategoryWhereInput
+  }
+
+  /**
+   * Course.chapters
+   */
+  export type Course$chaptersArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Chapter
+     */
+    select?: ChapterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Chapter
+     */
+    omit?: ChapterOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChapterInclude<ExtArgs> | null
+    where?: ChapterWhereInput
+    orderBy?: ChapterOrderByWithRelationInput | ChapterOrderByWithRelationInput[]
+    cursor?: ChapterWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: ChapterScalarFieldEnum | ChapterScalarFieldEnum[]
   }
 
   /**
@@ -4367,6 +4712,3319 @@ export namespace Prisma {
 
 
   /**
+   * Model Chapter
+   */
+
+  export type AggregateChapter = {
+    _count: ChapterCountAggregateOutputType | null
+    _avg: ChapterAvgAggregateOutputType | null
+    _sum: ChapterSumAggregateOutputType | null
+    _min: ChapterMinAggregateOutputType | null
+    _max: ChapterMaxAggregateOutputType | null
+  }
+
+  export type ChapterAvgAggregateOutputType = {
+    position: number | null
+  }
+
+  export type ChapterSumAggregateOutputType = {
+    position: number | null
+  }
+
+  export type ChapterMinAggregateOutputType = {
+    id: string | null
+    title: string | null
+    description: string | null
+    videoUrl: string | null
+    position: number | null
+    isPublished: boolean | null
+    courseId: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type ChapterMaxAggregateOutputType = {
+    id: string | null
+    title: string | null
+    description: string | null
+    videoUrl: string | null
+    position: number | null
+    isPublished: boolean | null
+    courseId: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type ChapterCountAggregateOutputType = {
+    id: number
+    title: number
+    description: number
+    videoUrl: number
+    position: number
+    isPublished: number
+    courseId: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type ChapterAvgAggregateInputType = {
+    position?: true
+  }
+
+  export type ChapterSumAggregateInputType = {
+    position?: true
+  }
+
+  export type ChapterMinAggregateInputType = {
+    id?: true
+    title?: true
+    description?: true
+    videoUrl?: true
+    position?: true
+    isPublished?: true
+    courseId?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type ChapterMaxAggregateInputType = {
+    id?: true
+    title?: true
+    description?: true
+    videoUrl?: true
+    position?: true
+    isPublished?: true
+    courseId?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type ChapterCountAggregateInputType = {
+    id?: true
+    title?: true
+    description?: true
+    videoUrl?: true
+    position?: true
+    isPublished?: true
+    courseId?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type ChapterAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Chapter to aggregate.
+     */
+    where?: ChapterWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Chapters to fetch.
+     */
+    orderBy?: ChapterOrderByWithRelationInput | ChapterOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: ChapterWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Chapters from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Chapters.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned Chapters
+    **/
+    _count?: true | ChapterCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to average
+    **/
+    _avg?: ChapterAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: ChapterSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: ChapterMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: ChapterMaxAggregateInputType
+  }
+
+  export type GetChapterAggregateType<T extends ChapterAggregateArgs> = {
+        [P in keyof T & keyof AggregateChapter]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateChapter[P]>
+      : GetScalarType<T[P], AggregateChapter[P]>
+  }
+
+
+
+
+  export type ChapterGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: ChapterWhereInput
+    orderBy?: ChapterOrderByWithAggregationInput | ChapterOrderByWithAggregationInput[]
+    by: ChapterScalarFieldEnum[] | ChapterScalarFieldEnum
+    having?: ChapterScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: ChapterCountAggregateInputType | true
+    _avg?: ChapterAvgAggregateInputType
+    _sum?: ChapterSumAggregateInputType
+    _min?: ChapterMinAggregateInputType
+    _max?: ChapterMaxAggregateInputType
+  }
+
+  export type ChapterGroupByOutputType = {
+    id: string
+    title: string
+    description: string | null
+    videoUrl: string | null
+    position: number
+    isPublished: boolean
+    courseId: string
+    createdAt: Date
+    updatedAt: Date
+    _count: ChapterCountAggregateOutputType | null
+    _avg: ChapterAvgAggregateOutputType | null
+    _sum: ChapterSumAggregateOutputType | null
+    _min: ChapterMinAggregateOutputType | null
+    _max: ChapterMaxAggregateOutputType | null
+  }
+
+  type GetChapterGroupByPayload<T extends ChapterGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<ChapterGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof ChapterGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], ChapterGroupByOutputType[P]>
+            : GetScalarType<T[P], ChapterGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type ChapterSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    title?: boolean
+    description?: boolean
+    videoUrl?: boolean
+    position?: boolean
+    isPublished?: boolean
+    courseId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    muxData?: boolean | Chapter$muxDataArgs<ExtArgs>
+    course?: boolean | CourseDefaultArgs<ExtArgs>
+    userProgress?: boolean | Chapter$userProgressArgs<ExtArgs>
+    _count?: boolean | ChapterCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["chapter"]>
+
+  export type ChapterSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    title?: boolean
+    description?: boolean
+    videoUrl?: boolean
+    position?: boolean
+    isPublished?: boolean
+    courseId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    course?: boolean | CourseDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["chapter"]>
+
+  export type ChapterSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    title?: boolean
+    description?: boolean
+    videoUrl?: boolean
+    position?: boolean
+    isPublished?: boolean
+    courseId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    course?: boolean | CourseDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["chapter"]>
+
+  export type ChapterSelectScalar = {
+    id?: boolean
+    title?: boolean
+    description?: boolean
+    videoUrl?: boolean
+    position?: boolean
+    isPublished?: boolean
+    courseId?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type ChapterOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description" | "videoUrl" | "position" | "isPublished" | "courseId" | "createdAt" | "updatedAt", ExtArgs["result"]["chapter"]>
+  export type ChapterInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    muxData?: boolean | Chapter$muxDataArgs<ExtArgs>
+    course?: boolean | CourseDefaultArgs<ExtArgs>
+    userProgress?: boolean | Chapter$userProgressArgs<ExtArgs>
+    _count?: boolean | ChapterCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type ChapterIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    course?: boolean | CourseDefaultArgs<ExtArgs>
+  }
+  export type ChapterIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    course?: boolean | CourseDefaultArgs<ExtArgs>
+  }
+
+  export type $ChapterPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "Chapter"
+    objects: {
+      muxData: Prisma.$MuxDataPayload<ExtArgs> | null
+      course: Prisma.$CoursePayload<ExtArgs>
+      userProgress: Prisma.$UserProgressPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      title: string
+      description: string | null
+      videoUrl: string | null
+      position: number
+      isPublished: boolean
+      courseId: string
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["chapter"]>
+    composites: {}
+  }
+
+  type ChapterGetPayload<S extends boolean | null | undefined | ChapterDefaultArgs> = $Result.GetResult<Prisma.$ChapterPayload, S>
+
+  type ChapterCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<ChapterFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: ChapterCountAggregateInputType | true
+    }
+
+  export interface ChapterDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['Chapter'], meta: { name: 'Chapter' } }
+    /**
+     * Find zero or one Chapter that matches the filter.
+     * @param {ChapterFindUniqueArgs} args - Arguments to find a Chapter
+     * @example
+     * // Get one Chapter
+     * const chapter = await prisma.chapter.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends ChapterFindUniqueArgs>(args: SelectSubset<T, ChapterFindUniqueArgs<ExtArgs>>): Prisma__ChapterClient<$Result.GetResult<Prisma.$ChapterPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one Chapter that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {ChapterFindUniqueOrThrowArgs} args - Arguments to find a Chapter
+     * @example
+     * // Get one Chapter
+     * const chapter = await prisma.chapter.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends ChapterFindUniqueOrThrowArgs>(args: SelectSubset<T, ChapterFindUniqueOrThrowArgs<ExtArgs>>): Prisma__ChapterClient<$Result.GetResult<Prisma.$ChapterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Chapter that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ChapterFindFirstArgs} args - Arguments to find a Chapter
+     * @example
+     * // Get one Chapter
+     * const chapter = await prisma.chapter.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends ChapterFindFirstArgs>(args?: SelectSubset<T, ChapterFindFirstArgs<ExtArgs>>): Prisma__ChapterClient<$Result.GetResult<Prisma.$ChapterPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first Chapter that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ChapterFindFirstOrThrowArgs} args - Arguments to find a Chapter
+     * @example
+     * // Get one Chapter
+     * const chapter = await prisma.chapter.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends ChapterFindFirstOrThrowArgs>(args?: SelectSubset<T, ChapterFindFirstOrThrowArgs<ExtArgs>>): Prisma__ChapterClient<$Result.GetResult<Prisma.$ChapterPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more Chapters that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ChapterFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all Chapters
+     * const chapters = await prisma.chapter.findMany()
+     * 
+     * // Get first 10 Chapters
+     * const chapters = await prisma.chapter.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const chapterWithIdOnly = await prisma.chapter.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends ChapterFindManyArgs>(args?: SelectSubset<T, ChapterFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ChapterPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a Chapter.
+     * @param {ChapterCreateArgs} args - Arguments to create a Chapter.
+     * @example
+     * // Create one Chapter
+     * const Chapter = await prisma.chapter.create({
+     *   data: {
+     *     // ... data to create a Chapter
+     *   }
+     * })
+     * 
+     */
+    create<T extends ChapterCreateArgs>(args: SelectSubset<T, ChapterCreateArgs<ExtArgs>>): Prisma__ChapterClient<$Result.GetResult<Prisma.$ChapterPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many Chapters.
+     * @param {ChapterCreateManyArgs} args - Arguments to create many Chapters.
+     * @example
+     * // Create many Chapters
+     * const chapter = await prisma.chapter.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends ChapterCreateManyArgs>(args?: SelectSubset<T, ChapterCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many Chapters and returns the data saved in the database.
+     * @param {ChapterCreateManyAndReturnArgs} args - Arguments to create many Chapters.
+     * @example
+     * // Create many Chapters
+     * const chapter = await prisma.chapter.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many Chapters and only return the `id`
+     * const chapterWithIdOnly = await prisma.chapter.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends ChapterCreateManyAndReturnArgs>(args?: SelectSubset<T, ChapterCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ChapterPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a Chapter.
+     * @param {ChapterDeleteArgs} args - Arguments to delete one Chapter.
+     * @example
+     * // Delete one Chapter
+     * const Chapter = await prisma.chapter.delete({
+     *   where: {
+     *     // ... filter to delete one Chapter
+     *   }
+     * })
+     * 
+     */
+    delete<T extends ChapterDeleteArgs>(args: SelectSubset<T, ChapterDeleteArgs<ExtArgs>>): Prisma__ChapterClient<$Result.GetResult<Prisma.$ChapterPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one Chapter.
+     * @param {ChapterUpdateArgs} args - Arguments to update one Chapter.
+     * @example
+     * // Update one Chapter
+     * const chapter = await prisma.chapter.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends ChapterUpdateArgs>(args: SelectSubset<T, ChapterUpdateArgs<ExtArgs>>): Prisma__ChapterClient<$Result.GetResult<Prisma.$ChapterPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more Chapters.
+     * @param {ChapterDeleteManyArgs} args - Arguments to filter Chapters to delete.
+     * @example
+     * // Delete a few Chapters
+     * const { count } = await prisma.chapter.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends ChapterDeleteManyArgs>(args?: SelectSubset<T, ChapterDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Chapters.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ChapterUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many Chapters
+     * const chapter = await prisma.chapter.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends ChapterUpdateManyArgs>(args: SelectSubset<T, ChapterUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more Chapters and returns the data updated in the database.
+     * @param {ChapterUpdateManyAndReturnArgs} args - Arguments to update many Chapters.
+     * @example
+     * // Update many Chapters
+     * const chapter = await prisma.chapter.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more Chapters and only return the `id`
+     * const chapterWithIdOnly = await prisma.chapter.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends ChapterUpdateManyAndReturnArgs>(args: SelectSubset<T, ChapterUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$ChapterPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one Chapter.
+     * @param {ChapterUpsertArgs} args - Arguments to update or create a Chapter.
+     * @example
+     * // Update or create a Chapter
+     * const chapter = await prisma.chapter.upsert({
+     *   create: {
+     *     // ... data to create a Chapter
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the Chapter we want to update
+     *   }
+     * })
+     */
+    upsert<T extends ChapterUpsertArgs>(args: SelectSubset<T, ChapterUpsertArgs<ExtArgs>>): Prisma__ChapterClient<$Result.GetResult<Prisma.$ChapterPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of Chapters.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ChapterCountArgs} args - Arguments to filter Chapters to count.
+     * @example
+     * // Count the number of Chapters
+     * const count = await prisma.chapter.count({
+     *   where: {
+     *     // ... the filter for the Chapters we want to count
+     *   }
+     * })
+    **/
+    count<T extends ChapterCountArgs>(
+      args?: Subset<T, ChapterCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], ChapterCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a Chapter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ChapterAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends ChapterAggregateArgs>(args: Subset<T, ChapterAggregateArgs>): Prisma.PrismaPromise<GetChapterAggregateType<T>>
+
+    /**
+     * Group by Chapter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {ChapterGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends ChapterGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: ChapterGroupByArgs['orderBy'] }
+        : { orderBy?: ChapterGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, ChapterGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetChapterGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the Chapter model
+   */
+  readonly fields: ChapterFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for Chapter.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__ChapterClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    muxData<T extends Chapter$muxDataArgs<ExtArgs> = {}>(args?: Subset<T, Chapter$muxDataArgs<ExtArgs>>): Prisma__MuxDataClient<$Result.GetResult<Prisma.$MuxDataPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+    course<T extends CourseDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CourseDefaultArgs<ExtArgs>>): Prisma__CourseClient<$Result.GetResult<Prisma.$CoursePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    userProgress<T extends Chapter$userProgressArgs<ExtArgs> = {}>(args?: Subset<T, Chapter$userProgressArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserProgressPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the Chapter model
+   */
+  interface ChapterFieldRefs {
+    readonly id: FieldRef<"Chapter", 'String'>
+    readonly title: FieldRef<"Chapter", 'String'>
+    readonly description: FieldRef<"Chapter", 'String'>
+    readonly videoUrl: FieldRef<"Chapter", 'String'>
+    readonly position: FieldRef<"Chapter", 'Int'>
+    readonly isPublished: FieldRef<"Chapter", 'Boolean'>
+    readonly courseId: FieldRef<"Chapter", 'String'>
+    readonly createdAt: FieldRef<"Chapter", 'DateTime'>
+    readonly updatedAt: FieldRef<"Chapter", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * Chapter findUnique
+   */
+  export type ChapterFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Chapter
+     */
+    select?: ChapterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Chapter
+     */
+    omit?: ChapterOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChapterInclude<ExtArgs> | null
+    /**
+     * Filter, which Chapter to fetch.
+     */
+    where: ChapterWhereUniqueInput
+  }
+
+  /**
+   * Chapter findUniqueOrThrow
+   */
+  export type ChapterFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Chapter
+     */
+    select?: ChapterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Chapter
+     */
+    omit?: ChapterOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChapterInclude<ExtArgs> | null
+    /**
+     * Filter, which Chapter to fetch.
+     */
+    where: ChapterWhereUniqueInput
+  }
+
+  /**
+   * Chapter findFirst
+   */
+  export type ChapterFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Chapter
+     */
+    select?: ChapterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Chapter
+     */
+    omit?: ChapterOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChapterInclude<ExtArgs> | null
+    /**
+     * Filter, which Chapter to fetch.
+     */
+    where?: ChapterWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Chapters to fetch.
+     */
+    orderBy?: ChapterOrderByWithRelationInput | ChapterOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Chapters.
+     */
+    cursor?: ChapterWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Chapters from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Chapters.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Chapters.
+     */
+    distinct?: ChapterScalarFieldEnum | ChapterScalarFieldEnum[]
+  }
+
+  /**
+   * Chapter findFirstOrThrow
+   */
+  export type ChapterFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Chapter
+     */
+    select?: ChapterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Chapter
+     */
+    omit?: ChapterOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChapterInclude<ExtArgs> | null
+    /**
+     * Filter, which Chapter to fetch.
+     */
+    where?: ChapterWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Chapters to fetch.
+     */
+    orderBy?: ChapterOrderByWithRelationInput | ChapterOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for Chapters.
+     */
+    cursor?: ChapterWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Chapters from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Chapters.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Chapters.
+     */
+    distinct?: ChapterScalarFieldEnum | ChapterScalarFieldEnum[]
+  }
+
+  /**
+   * Chapter findMany
+   */
+  export type ChapterFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Chapter
+     */
+    select?: ChapterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Chapter
+     */
+    omit?: ChapterOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChapterInclude<ExtArgs> | null
+    /**
+     * Filter, which Chapters to fetch.
+     */
+    where?: ChapterWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of Chapters to fetch.
+     */
+    orderBy?: ChapterOrderByWithRelationInput | ChapterOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing Chapters.
+     */
+    cursor?: ChapterWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` Chapters from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` Chapters.
+     */
+    skip?: number
+    distinct?: ChapterScalarFieldEnum | ChapterScalarFieldEnum[]
+  }
+
+  /**
+   * Chapter create
+   */
+  export type ChapterCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Chapter
+     */
+    select?: ChapterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Chapter
+     */
+    omit?: ChapterOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChapterInclude<ExtArgs> | null
+    /**
+     * The data needed to create a Chapter.
+     */
+    data: XOR<ChapterCreateInput, ChapterUncheckedCreateInput>
+  }
+
+  /**
+   * Chapter createMany
+   */
+  export type ChapterCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many Chapters.
+     */
+    data: ChapterCreateManyInput | ChapterCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * Chapter createManyAndReturn
+   */
+  export type ChapterCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Chapter
+     */
+    select?: ChapterSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Chapter
+     */
+    omit?: ChapterOmit<ExtArgs> | null
+    /**
+     * The data used to create many Chapters.
+     */
+    data: ChapterCreateManyInput | ChapterCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChapterIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Chapter update
+   */
+  export type ChapterUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Chapter
+     */
+    select?: ChapterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Chapter
+     */
+    omit?: ChapterOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChapterInclude<ExtArgs> | null
+    /**
+     * The data needed to update a Chapter.
+     */
+    data: XOR<ChapterUpdateInput, ChapterUncheckedUpdateInput>
+    /**
+     * Choose, which Chapter to update.
+     */
+    where: ChapterWhereUniqueInput
+  }
+
+  /**
+   * Chapter updateMany
+   */
+  export type ChapterUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update Chapters.
+     */
+    data: XOR<ChapterUpdateManyMutationInput, ChapterUncheckedUpdateManyInput>
+    /**
+     * Filter which Chapters to update
+     */
+    where?: ChapterWhereInput
+    /**
+     * Limit how many Chapters to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * Chapter updateManyAndReturn
+   */
+  export type ChapterUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Chapter
+     */
+    select?: ChapterSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the Chapter
+     */
+    omit?: ChapterOmit<ExtArgs> | null
+    /**
+     * The data used to update Chapters.
+     */
+    data: XOR<ChapterUpdateManyMutationInput, ChapterUncheckedUpdateManyInput>
+    /**
+     * Filter which Chapters to update
+     */
+    where?: ChapterWhereInput
+    /**
+     * Limit how many Chapters to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChapterIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * Chapter upsert
+   */
+  export type ChapterUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Chapter
+     */
+    select?: ChapterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Chapter
+     */
+    omit?: ChapterOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChapterInclude<ExtArgs> | null
+    /**
+     * The filter to search for the Chapter to update in case it exists.
+     */
+    where: ChapterWhereUniqueInput
+    /**
+     * In case the Chapter found by the `where` argument doesn't exist, create a new Chapter with this data.
+     */
+    create: XOR<ChapterCreateInput, ChapterUncheckedCreateInput>
+    /**
+     * In case the Chapter was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<ChapterUpdateInput, ChapterUncheckedUpdateInput>
+  }
+
+  /**
+   * Chapter delete
+   */
+  export type ChapterDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Chapter
+     */
+    select?: ChapterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Chapter
+     */
+    omit?: ChapterOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChapterInclude<ExtArgs> | null
+    /**
+     * Filter which Chapter to delete.
+     */
+    where: ChapterWhereUniqueInput
+  }
+
+  /**
+   * Chapter deleteMany
+   */
+  export type ChapterDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which Chapters to delete
+     */
+    where?: ChapterWhereInput
+    /**
+     * Limit how many Chapters to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * Chapter.muxData
+   */
+  export type Chapter$muxDataArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MuxData
+     */
+    select?: MuxDataSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MuxData
+     */
+    omit?: MuxDataOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MuxDataInclude<ExtArgs> | null
+    where?: MuxDataWhereInput
+  }
+
+  /**
+   * Chapter.userProgress
+   */
+  export type Chapter$userProgressArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserProgress
+     */
+    select?: UserProgressSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserProgress
+     */
+    omit?: UserProgressOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserProgressInclude<ExtArgs> | null
+    where?: UserProgressWhereInput
+    orderBy?: UserProgressOrderByWithRelationInput | UserProgressOrderByWithRelationInput[]
+    cursor?: UserProgressWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: UserProgressScalarFieldEnum | UserProgressScalarFieldEnum[]
+  }
+
+  /**
+   * Chapter without action
+   */
+  export type ChapterDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Chapter
+     */
+    select?: ChapterSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Chapter
+     */
+    omit?: ChapterOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: ChapterInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model MuxData
+   */
+
+  export type AggregateMuxData = {
+    _count: MuxDataCountAggregateOutputType | null
+    _min: MuxDataMinAggregateOutputType | null
+    _max: MuxDataMaxAggregateOutputType | null
+  }
+
+  export type MuxDataMinAggregateOutputType = {
+    id: string | null
+    assetId: string | null
+    playbackId: string | null
+    chapterId: string | null
+  }
+
+  export type MuxDataMaxAggregateOutputType = {
+    id: string | null
+    assetId: string | null
+    playbackId: string | null
+    chapterId: string | null
+  }
+
+  export type MuxDataCountAggregateOutputType = {
+    id: number
+    assetId: number
+    playbackId: number
+    chapterId: number
+    _all: number
+  }
+
+
+  export type MuxDataMinAggregateInputType = {
+    id?: true
+    assetId?: true
+    playbackId?: true
+    chapterId?: true
+  }
+
+  export type MuxDataMaxAggregateInputType = {
+    id?: true
+    assetId?: true
+    playbackId?: true
+    chapterId?: true
+  }
+
+  export type MuxDataCountAggregateInputType = {
+    id?: true
+    assetId?: true
+    playbackId?: true
+    chapterId?: true
+    _all?: true
+  }
+
+  export type MuxDataAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which MuxData to aggregate.
+     */
+    where?: MuxDataWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MuxData to fetch.
+     */
+    orderBy?: MuxDataOrderByWithRelationInput | MuxDataOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: MuxDataWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MuxData from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MuxData.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned MuxData
+    **/
+    _count?: true | MuxDataCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: MuxDataMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: MuxDataMaxAggregateInputType
+  }
+
+  export type GetMuxDataAggregateType<T extends MuxDataAggregateArgs> = {
+        [P in keyof T & keyof AggregateMuxData]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateMuxData[P]>
+      : GetScalarType<T[P], AggregateMuxData[P]>
+  }
+
+
+
+
+  export type MuxDataGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: MuxDataWhereInput
+    orderBy?: MuxDataOrderByWithAggregationInput | MuxDataOrderByWithAggregationInput[]
+    by: MuxDataScalarFieldEnum[] | MuxDataScalarFieldEnum
+    having?: MuxDataScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: MuxDataCountAggregateInputType | true
+    _min?: MuxDataMinAggregateInputType
+    _max?: MuxDataMaxAggregateInputType
+  }
+
+  export type MuxDataGroupByOutputType = {
+    id: string
+    assetId: string
+    playbackId: string | null
+    chapterId: string
+    _count: MuxDataCountAggregateOutputType | null
+    _min: MuxDataMinAggregateOutputType | null
+    _max: MuxDataMaxAggregateOutputType | null
+  }
+
+  type GetMuxDataGroupByPayload<T extends MuxDataGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<MuxDataGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof MuxDataGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], MuxDataGroupByOutputType[P]>
+            : GetScalarType<T[P], MuxDataGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type MuxDataSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    assetId?: boolean
+    playbackId?: boolean
+    chapterId?: boolean
+    chapter?: boolean | ChapterDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["muxData"]>
+
+  export type MuxDataSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    assetId?: boolean
+    playbackId?: boolean
+    chapterId?: boolean
+    chapter?: boolean | ChapterDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["muxData"]>
+
+  export type MuxDataSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    assetId?: boolean
+    playbackId?: boolean
+    chapterId?: boolean
+    chapter?: boolean | ChapterDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["muxData"]>
+
+  export type MuxDataSelectScalar = {
+    id?: boolean
+    assetId?: boolean
+    playbackId?: boolean
+    chapterId?: boolean
+  }
+
+  export type MuxDataOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "assetId" | "playbackId" | "chapterId", ExtArgs["result"]["muxData"]>
+  export type MuxDataInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    chapter?: boolean | ChapterDefaultArgs<ExtArgs>
+  }
+  export type MuxDataIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    chapter?: boolean | ChapterDefaultArgs<ExtArgs>
+  }
+  export type MuxDataIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    chapter?: boolean | ChapterDefaultArgs<ExtArgs>
+  }
+
+  export type $MuxDataPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "MuxData"
+    objects: {
+      chapter: Prisma.$ChapterPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      assetId: string
+      playbackId: string | null
+      chapterId: string
+    }, ExtArgs["result"]["muxData"]>
+    composites: {}
+  }
+
+  type MuxDataGetPayload<S extends boolean | null | undefined | MuxDataDefaultArgs> = $Result.GetResult<Prisma.$MuxDataPayload, S>
+
+  type MuxDataCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<MuxDataFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: MuxDataCountAggregateInputType | true
+    }
+
+  export interface MuxDataDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['MuxData'], meta: { name: 'MuxData' } }
+    /**
+     * Find zero or one MuxData that matches the filter.
+     * @param {MuxDataFindUniqueArgs} args - Arguments to find a MuxData
+     * @example
+     * // Get one MuxData
+     * const muxData = await prisma.muxData.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends MuxDataFindUniqueArgs>(args: SelectSubset<T, MuxDataFindUniqueArgs<ExtArgs>>): Prisma__MuxDataClient<$Result.GetResult<Prisma.$MuxDataPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one MuxData that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {MuxDataFindUniqueOrThrowArgs} args - Arguments to find a MuxData
+     * @example
+     * // Get one MuxData
+     * const muxData = await prisma.muxData.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends MuxDataFindUniqueOrThrowArgs>(args: SelectSubset<T, MuxDataFindUniqueOrThrowArgs<ExtArgs>>): Prisma__MuxDataClient<$Result.GetResult<Prisma.$MuxDataPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first MuxData that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MuxDataFindFirstArgs} args - Arguments to find a MuxData
+     * @example
+     * // Get one MuxData
+     * const muxData = await prisma.muxData.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends MuxDataFindFirstArgs>(args?: SelectSubset<T, MuxDataFindFirstArgs<ExtArgs>>): Prisma__MuxDataClient<$Result.GetResult<Prisma.$MuxDataPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first MuxData that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MuxDataFindFirstOrThrowArgs} args - Arguments to find a MuxData
+     * @example
+     * // Get one MuxData
+     * const muxData = await prisma.muxData.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends MuxDataFindFirstOrThrowArgs>(args?: SelectSubset<T, MuxDataFindFirstOrThrowArgs<ExtArgs>>): Prisma__MuxDataClient<$Result.GetResult<Prisma.$MuxDataPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more MuxData that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MuxDataFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all MuxData
+     * const muxData = await prisma.muxData.findMany()
+     * 
+     * // Get first 10 MuxData
+     * const muxData = await prisma.muxData.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const muxDataWithIdOnly = await prisma.muxData.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends MuxDataFindManyArgs>(args?: SelectSubset<T, MuxDataFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MuxDataPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a MuxData.
+     * @param {MuxDataCreateArgs} args - Arguments to create a MuxData.
+     * @example
+     * // Create one MuxData
+     * const MuxData = await prisma.muxData.create({
+     *   data: {
+     *     // ... data to create a MuxData
+     *   }
+     * })
+     * 
+     */
+    create<T extends MuxDataCreateArgs>(args: SelectSubset<T, MuxDataCreateArgs<ExtArgs>>): Prisma__MuxDataClient<$Result.GetResult<Prisma.$MuxDataPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many MuxData.
+     * @param {MuxDataCreateManyArgs} args - Arguments to create many MuxData.
+     * @example
+     * // Create many MuxData
+     * const muxData = await prisma.muxData.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends MuxDataCreateManyArgs>(args?: SelectSubset<T, MuxDataCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many MuxData and returns the data saved in the database.
+     * @param {MuxDataCreateManyAndReturnArgs} args - Arguments to create many MuxData.
+     * @example
+     * // Create many MuxData
+     * const muxData = await prisma.muxData.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many MuxData and only return the `id`
+     * const muxDataWithIdOnly = await prisma.muxData.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends MuxDataCreateManyAndReturnArgs>(args?: SelectSubset<T, MuxDataCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MuxDataPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a MuxData.
+     * @param {MuxDataDeleteArgs} args - Arguments to delete one MuxData.
+     * @example
+     * // Delete one MuxData
+     * const MuxData = await prisma.muxData.delete({
+     *   where: {
+     *     // ... filter to delete one MuxData
+     *   }
+     * })
+     * 
+     */
+    delete<T extends MuxDataDeleteArgs>(args: SelectSubset<T, MuxDataDeleteArgs<ExtArgs>>): Prisma__MuxDataClient<$Result.GetResult<Prisma.$MuxDataPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one MuxData.
+     * @param {MuxDataUpdateArgs} args - Arguments to update one MuxData.
+     * @example
+     * // Update one MuxData
+     * const muxData = await prisma.muxData.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends MuxDataUpdateArgs>(args: SelectSubset<T, MuxDataUpdateArgs<ExtArgs>>): Prisma__MuxDataClient<$Result.GetResult<Prisma.$MuxDataPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more MuxData.
+     * @param {MuxDataDeleteManyArgs} args - Arguments to filter MuxData to delete.
+     * @example
+     * // Delete a few MuxData
+     * const { count } = await prisma.muxData.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends MuxDataDeleteManyArgs>(args?: SelectSubset<T, MuxDataDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more MuxData.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MuxDataUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many MuxData
+     * const muxData = await prisma.muxData.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends MuxDataUpdateManyArgs>(args: SelectSubset<T, MuxDataUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more MuxData and returns the data updated in the database.
+     * @param {MuxDataUpdateManyAndReturnArgs} args - Arguments to update many MuxData.
+     * @example
+     * // Update many MuxData
+     * const muxData = await prisma.muxData.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more MuxData and only return the `id`
+     * const muxDataWithIdOnly = await prisma.muxData.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends MuxDataUpdateManyAndReturnArgs>(args: SelectSubset<T, MuxDataUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$MuxDataPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one MuxData.
+     * @param {MuxDataUpsertArgs} args - Arguments to update or create a MuxData.
+     * @example
+     * // Update or create a MuxData
+     * const muxData = await prisma.muxData.upsert({
+     *   create: {
+     *     // ... data to create a MuxData
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the MuxData we want to update
+     *   }
+     * })
+     */
+    upsert<T extends MuxDataUpsertArgs>(args: SelectSubset<T, MuxDataUpsertArgs<ExtArgs>>): Prisma__MuxDataClient<$Result.GetResult<Prisma.$MuxDataPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of MuxData.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MuxDataCountArgs} args - Arguments to filter MuxData to count.
+     * @example
+     * // Count the number of MuxData
+     * const count = await prisma.muxData.count({
+     *   where: {
+     *     // ... the filter for the MuxData we want to count
+     *   }
+     * })
+    **/
+    count<T extends MuxDataCountArgs>(
+      args?: Subset<T, MuxDataCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], MuxDataCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a MuxData.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MuxDataAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends MuxDataAggregateArgs>(args: Subset<T, MuxDataAggregateArgs>): Prisma.PrismaPromise<GetMuxDataAggregateType<T>>
+
+    /**
+     * Group by MuxData.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {MuxDataGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends MuxDataGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: MuxDataGroupByArgs['orderBy'] }
+        : { orderBy?: MuxDataGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, MuxDataGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetMuxDataGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the MuxData model
+   */
+  readonly fields: MuxDataFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for MuxData.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__MuxDataClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    chapter<T extends ChapterDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ChapterDefaultArgs<ExtArgs>>): Prisma__ChapterClient<$Result.GetResult<Prisma.$ChapterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the MuxData model
+   */
+  interface MuxDataFieldRefs {
+    readonly id: FieldRef<"MuxData", 'String'>
+    readonly assetId: FieldRef<"MuxData", 'String'>
+    readonly playbackId: FieldRef<"MuxData", 'String'>
+    readonly chapterId: FieldRef<"MuxData", 'String'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * MuxData findUnique
+   */
+  export type MuxDataFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MuxData
+     */
+    select?: MuxDataSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MuxData
+     */
+    omit?: MuxDataOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MuxDataInclude<ExtArgs> | null
+    /**
+     * Filter, which MuxData to fetch.
+     */
+    where: MuxDataWhereUniqueInput
+  }
+
+  /**
+   * MuxData findUniqueOrThrow
+   */
+  export type MuxDataFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MuxData
+     */
+    select?: MuxDataSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MuxData
+     */
+    omit?: MuxDataOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MuxDataInclude<ExtArgs> | null
+    /**
+     * Filter, which MuxData to fetch.
+     */
+    where: MuxDataWhereUniqueInput
+  }
+
+  /**
+   * MuxData findFirst
+   */
+  export type MuxDataFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MuxData
+     */
+    select?: MuxDataSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MuxData
+     */
+    omit?: MuxDataOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MuxDataInclude<ExtArgs> | null
+    /**
+     * Filter, which MuxData to fetch.
+     */
+    where?: MuxDataWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MuxData to fetch.
+     */
+    orderBy?: MuxDataOrderByWithRelationInput | MuxDataOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for MuxData.
+     */
+    cursor?: MuxDataWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MuxData from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MuxData.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of MuxData.
+     */
+    distinct?: MuxDataScalarFieldEnum | MuxDataScalarFieldEnum[]
+  }
+
+  /**
+   * MuxData findFirstOrThrow
+   */
+  export type MuxDataFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MuxData
+     */
+    select?: MuxDataSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MuxData
+     */
+    omit?: MuxDataOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MuxDataInclude<ExtArgs> | null
+    /**
+     * Filter, which MuxData to fetch.
+     */
+    where?: MuxDataWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MuxData to fetch.
+     */
+    orderBy?: MuxDataOrderByWithRelationInput | MuxDataOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for MuxData.
+     */
+    cursor?: MuxDataWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MuxData from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MuxData.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of MuxData.
+     */
+    distinct?: MuxDataScalarFieldEnum | MuxDataScalarFieldEnum[]
+  }
+
+  /**
+   * MuxData findMany
+   */
+  export type MuxDataFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MuxData
+     */
+    select?: MuxDataSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MuxData
+     */
+    omit?: MuxDataOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MuxDataInclude<ExtArgs> | null
+    /**
+     * Filter, which MuxData to fetch.
+     */
+    where?: MuxDataWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of MuxData to fetch.
+     */
+    orderBy?: MuxDataOrderByWithRelationInput | MuxDataOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing MuxData.
+     */
+    cursor?: MuxDataWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` MuxData from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` MuxData.
+     */
+    skip?: number
+    distinct?: MuxDataScalarFieldEnum | MuxDataScalarFieldEnum[]
+  }
+
+  /**
+   * MuxData create
+   */
+  export type MuxDataCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MuxData
+     */
+    select?: MuxDataSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MuxData
+     */
+    omit?: MuxDataOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MuxDataInclude<ExtArgs> | null
+    /**
+     * The data needed to create a MuxData.
+     */
+    data: XOR<MuxDataCreateInput, MuxDataUncheckedCreateInput>
+  }
+
+  /**
+   * MuxData createMany
+   */
+  export type MuxDataCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many MuxData.
+     */
+    data: MuxDataCreateManyInput | MuxDataCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * MuxData createManyAndReturn
+   */
+  export type MuxDataCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MuxData
+     */
+    select?: MuxDataSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the MuxData
+     */
+    omit?: MuxDataOmit<ExtArgs> | null
+    /**
+     * The data used to create many MuxData.
+     */
+    data: MuxDataCreateManyInput | MuxDataCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MuxDataIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * MuxData update
+   */
+  export type MuxDataUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MuxData
+     */
+    select?: MuxDataSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MuxData
+     */
+    omit?: MuxDataOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MuxDataInclude<ExtArgs> | null
+    /**
+     * The data needed to update a MuxData.
+     */
+    data: XOR<MuxDataUpdateInput, MuxDataUncheckedUpdateInput>
+    /**
+     * Choose, which MuxData to update.
+     */
+    where: MuxDataWhereUniqueInput
+  }
+
+  /**
+   * MuxData updateMany
+   */
+  export type MuxDataUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update MuxData.
+     */
+    data: XOR<MuxDataUpdateManyMutationInput, MuxDataUncheckedUpdateManyInput>
+    /**
+     * Filter which MuxData to update
+     */
+    where?: MuxDataWhereInput
+    /**
+     * Limit how many MuxData to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * MuxData updateManyAndReturn
+   */
+  export type MuxDataUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MuxData
+     */
+    select?: MuxDataSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the MuxData
+     */
+    omit?: MuxDataOmit<ExtArgs> | null
+    /**
+     * The data used to update MuxData.
+     */
+    data: XOR<MuxDataUpdateManyMutationInput, MuxDataUncheckedUpdateManyInput>
+    /**
+     * Filter which MuxData to update
+     */
+    where?: MuxDataWhereInput
+    /**
+     * Limit how many MuxData to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MuxDataIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * MuxData upsert
+   */
+  export type MuxDataUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MuxData
+     */
+    select?: MuxDataSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MuxData
+     */
+    omit?: MuxDataOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MuxDataInclude<ExtArgs> | null
+    /**
+     * The filter to search for the MuxData to update in case it exists.
+     */
+    where: MuxDataWhereUniqueInput
+    /**
+     * In case the MuxData found by the `where` argument doesn't exist, create a new MuxData with this data.
+     */
+    create: XOR<MuxDataCreateInput, MuxDataUncheckedCreateInput>
+    /**
+     * In case the MuxData was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<MuxDataUpdateInput, MuxDataUncheckedUpdateInput>
+  }
+
+  /**
+   * MuxData delete
+   */
+  export type MuxDataDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MuxData
+     */
+    select?: MuxDataSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MuxData
+     */
+    omit?: MuxDataOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MuxDataInclude<ExtArgs> | null
+    /**
+     * Filter which MuxData to delete.
+     */
+    where: MuxDataWhereUniqueInput
+  }
+
+  /**
+   * MuxData deleteMany
+   */
+  export type MuxDataDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which MuxData to delete
+     */
+    where?: MuxDataWhereInput
+    /**
+     * Limit how many MuxData to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * MuxData without action
+   */
+  export type MuxDataDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MuxData
+     */
+    select?: MuxDataSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MuxData
+     */
+    omit?: MuxDataOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MuxDataInclude<ExtArgs> | null
+  }
+
+
+  /**
+   * Model UserProgress
+   */
+
+  export type AggregateUserProgress = {
+    _count: UserProgressCountAggregateOutputType | null
+    _min: UserProgressMinAggregateOutputType | null
+    _max: UserProgressMaxAggregateOutputType | null
+  }
+
+  export type UserProgressMinAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    chapterId: string | null
+    isComplete: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type UserProgressMaxAggregateOutputType = {
+    id: string | null
+    userId: string | null
+    chapterId: string | null
+    isComplete: boolean | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type UserProgressCountAggregateOutputType = {
+    id: number
+    userId: number
+    chapterId: number
+    isComplete: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type UserProgressMinAggregateInputType = {
+    id?: true
+    userId?: true
+    chapterId?: true
+    isComplete?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type UserProgressMaxAggregateInputType = {
+    id?: true
+    userId?: true
+    chapterId?: true
+    isComplete?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type UserProgressCountAggregateInputType = {
+    id?: true
+    userId?: true
+    chapterId?: true
+    isComplete?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type UserProgressAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which UserProgress to aggregate.
+     */
+    where?: UserProgressWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UserProgresses to fetch.
+     */
+    orderBy?: UserProgressOrderByWithRelationInput | UserProgressOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: UserProgressWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UserProgresses from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UserProgresses.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned UserProgresses
+    **/
+    _count?: true | UserProgressCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: UserProgressMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: UserProgressMaxAggregateInputType
+  }
+
+  export type GetUserProgressAggregateType<T extends UserProgressAggregateArgs> = {
+        [P in keyof T & keyof AggregateUserProgress]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateUserProgress[P]>
+      : GetScalarType<T[P], AggregateUserProgress[P]>
+  }
+
+
+
+
+  export type UserProgressGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: UserProgressWhereInput
+    orderBy?: UserProgressOrderByWithAggregationInput | UserProgressOrderByWithAggregationInput[]
+    by: UserProgressScalarFieldEnum[] | UserProgressScalarFieldEnum
+    having?: UserProgressScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: UserProgressCountAggregateInputType | true
+    _min?: UserProgressMinAggregateInputType
+    _max?: UserProgressMaxAggregateInputType
+  }
+
+  export type UserProgressGroupByOutputType = {
+    id: string
+    userId: string
+    chapterId: string
+    isComplete: boolean
+    createdAt: Date
+    updatedAt: Date
+    _count: UserProgressCountAggregateOutputType | null
+    _min: UserProgressMinAggregateOutputType | null
+    _max: UserProgressMaxAggregateOutputType | null
+  }
+
+  type GetUserProgressGroupByPayload<T extends UserProgressGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<UserProgressGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof UserProgressGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], UserProgressGroupByOutputType[P]>
+            : GetScalarType<T[P], UserProgressGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type UserProgressSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    chapterId?: boolean
+    isComplete?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    chapter?: boolean | ChapterDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["userProgress"]>
+
+  export type UserProgressSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    chapterId?: boolean
+    isComplete?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    chapter?: boolean | ChapterDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["userProgress"]>
+
+  export type UserProgressSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    userId?: boolean
+    chapterId?: boolean
+    isComplete?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    chapter?: boolean | ChapterDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["userProgress"]>
+
+  export type UserProgressSelectScalar = {
+    id?: boolean
+    userId?: boolean
+    chapterId?: boolean
+    isComplete?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type UserProgressOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "userId" | "chapterId" | "isComplete" | "createdAt" | "updatedAt", ExtArgs["result"]["userProgress"]>
+  export type UserProgressInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    chapter?: boolean | ChapterDefaultArgs<ExtArgs>
+  }
+  export type UserProgressIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    chapter?: boolean | ChapterDefaultArgs<ExtArgs>
+  }
+  export type UserProgressIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    chapter?: boolean | ChapterDefaultArgs<ExtArgs>
+  }
+
+  export type $UserProgressPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "UserProgress"
+    objects: {
+      chapter: Prisma.$ChapterPayload<ExtArgs>
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      userId: string
+      chapterId: string
+      isComplete: boolean
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["userProgress"]>
+    composites: {}
+  }
+
+  type UserProgressGetPayload<S extends boolean | null | undefined | UserProgressDefaultArgs> = $Result.GetResult<Prisma.$UserProgressPayload, S>
+
+  type UserProgressCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<UserProgressFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: UserProgressCountAggregateInputType | true
+    }
+
+  export interface UserProgressDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['UserProgress'], meta: { name: 'UserProgress' } }
+    /**
+     * Find zero or one UserProgress that matches the filter.
+     * @param {UserProgressFindUniqueArgs} args - Arguments to find a UserProgress
+     * @example
+     * // Get one UserProgress
+     * const userProgress = await prisma.userProgress.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends UserProgressFindUniqueArgs>(args: SelectSubset<T, UserProgressFindUniqueArgs<ExtArgs>>): Prisma__UserProgressClient<$Result.GetResult<Prisma.$UserProgressPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one UserProgress that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {UserProgressFindUniqueOrThrowArgs} args - Arguments to find a UserProgress
+     * @example
+     * // Get one UserProgress
+     * const userProgress = await prisma.userProgress.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends UserProgressFindUniqueOrThrowArgs>(args: SelectSubset<T, UserProgressFindUniqueOrThrowArgs<ExtArgs>>): Prisma__UserProgressClient<$Result.GetResult<Prisma.$UserProgressPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first UserProgress that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserProgressFindFirstArgs} args - Arguments to find a UserProgress
+     * @example
+     * // Get one UserProgress
+     * const userProgress = await prisma.userProgress.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends UserProgressFindFirstArgs>(args?: SelectSubset<T, UserProgressFindFirstArgs<ExtArgs>>): Prisma__UserProgressClient<$Result.GetResult<Prisma.$UserProgressPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first UserProgress that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserProgressFindFirstOrThrowArgs} args - Arguments to find a UserProgress
+     * @example
+     * // Get one UserProgress
+     * const userProgress = await prisma.userProgress.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends UserProgressFindFirstOrThrowArgs>(args?: SelectSubset<T, UserProgressFindFirstOrThrowArgs<ExtArgs>>): Prisma__UserProgressClient<$Result.GetResult<Prisma.$UserProgressPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more UserProgresses that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserProgressFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all UserProgresses
+     * const userProgresses = await prisma.userProgress.findMany()
+     * 
+     * // Get first 10 UserProgresses
+     * const userProgresses = await prisma.userProgress.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const userProgressWithIdOnly = await prisma.userProgress.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends UserProgressFindManyArgs>(args?: SelectSubset<T, UserProgressFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserProgressPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a UserProgress.
+     * @param {UserProgressCreateArgs} args - Arguments to create a UserProgress.
+     * @example
+     * // Create one UserProgress
+     * const UserProgress = await prisma.userProgress.create({
+     *   data: {
+     *     // ... data to create a UserProgress
+     *   }
+     * })
+     * 
+     */
+    create<T extends UserProgressCreateArgs>(args: SelectSubset<T, UserProgressCreateArgs<ExtArgs>>): Prisma__UserProgressClient<$Result.GetResult<Prisma.$UserProgressPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many UserProgresses.
+     * @param {UserProgressCreateManyArgs} args - Arguments to create many UserProgresses.
+     * @example
+     * // Create many UserProgresses
+     * const userProgress = await prisma.userProgress.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends UserProgressCreateManyArgs>(args?: SelectSubset<T, UserProgressCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many UserProgresses and returns the data saved in the database.
+     * @param {UserProgressCreateManyAndReturnArgs} args - Arguments to create many UserProgresses.
+     * @example
+     * // Create many UserProgresses
+     * const userProgress = await prisma.userProgress.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many UserProgresses and only return the `id`
+     * const userProgressWithIdOnly = await prisma.userProgress.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends UserProgressCreateManyAndReturnArgs>(args?: SelectSubset<T, UserProgressCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserProgressPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a UserProgress.
+     * @param {UserProgressDeleteArgs} args - Arguments to delete one UserProgress.
+     * @example
+     * // Delete one UserProgress
+     * const UserProgress = await prisma.userProgress.delete({
+     *   where: {
+     *     // ... filter to delete one UserProgress
+     *   }
+     * })
+     * 
+     */
+    delete<T extends UserProgressDeleteArgs>(args: SelectSubset<T, UserProgressDeleteArgs<ExtArgs>>): Prisma__UserProgressClient<$Result.GetResult<Prisma.$UserProgressPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one UserProgress.
+     * @param {UserProgressUpdateArgs} args - Arguments to update one UserProgress.
+     * @example
+     * // Update one UserProgress
+     * const userProgress = await prisma.userProgress.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends UserProgressUpdateArgs>(args: SelectSubset<T, UserProgressUpdateArgs<ExtArgs>>): Prisma__UserProgressClient<$Result.GetResult<Prisma.$UserProgressPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more UserProgresses.
+     * @param {UserProgressDeleteManyArgs} args - Arguments to filter UserProgresses to delete.
+     * @example
+     * // Delete a few UserProgresses
+     * const { count } = await prisma.userProgress.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends UserProgressDeleteManyArgs>(args?: SelectSubset<T, UserProgressDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more UserProgresses.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserProgressUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many UserProgresses
+     * const userProgress = await prisma.userProgress.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends UserProgressUpdateManyArgs>(args: SelectSubset<T, UserProgressUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more UserProgresses and returns the data updated in the database.
+     * @param {UserProgressUpdateManyAndReturnArgs} args - Arguments to update many UserProgresses.
+     * @example
+     * // Update many UserProgresses
+     * const userProgress = await prisma.userProgress.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more UserProgresses and only return the `id`
+     * const userProgressWithIdOnly = await prisma.userProgress.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends UserProgressUpdateManyAndReturnArgs>(args: SelectSubset<T, UserProgressUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$UserProgressPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one UserProgress.
+     * @param {UserProgressUpsertArgs} args - Arguments to update or create a UserProgress.
+     * @example
+     * // Update or create a UserProgress
+     * const userProgress = await prisma.userProgress.upsert({
+     *   create: {
+     *     // ... data to create a UserProgress
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the UserProgress we want to update
+     *   }
+     * })
+     */
+    upsert<T extends UserProgressUpsertArgs>(args: SelectSubset<T, UserProgressUpsertArgs<ExtArgs>>): Prisma__UserProgressClient<$Result.GetResult<Prisma.$UserProgressPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of UserProgresses.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserProgressCountArgs} args - Arguments to filter UserProgresses to count.
+     * @example
+     * // Count the number of UserProgresses
+     * const count = await prisma.userProgress.count({
+     *   where: {
+     *     // ... the filter for the UserProgresses we want to count
+     *   }
+     * })
+    **/
+    count<T extends UserProgressCountArgs>(
+      args?: Subset<T, UserProgressCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], UserProgressCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a UserProgress.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserProgressAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends UserProgressAggregateArgs>(args: Subset<T, UserProgressAggregateArgs>): Prisma.PrismaPromise<GetUserProgressAggregateType<T>>
+
+    /**
+     * Group by UserProgress.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {UserProgressGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends UserProgressGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: UserProgressGroupByArgs['orderBy'] }
+        : { orderBy?: UserProgressGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, UserProgressGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetUserProgressGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the UserProgress model
+   */
+  readonly fields: UserProgressFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for UserProgress.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__UserProgressClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    chapter<T extends ChapterDefaultArgs<ExtArgs> = {}>(args?: Subset<T, ChapterDefaultArgs<ExtArgs>>): Prisma__ChapterClient<$Result.GetResult<Prisma.$ChapterPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the UserProgress model
+   */
+  interface UserProgressFieldRefs {
+    readonly id: FieldRef<"UserProgress", 'String'>
+    readonly userId: FieldRef<"UserProgress", 'String'>
+    readonly chapterId: FieldRef<"UserProgress", 'String'>
+    readonly isComplete: FieldRef<"UserProgress", 'Boolean'>
+    readonly createdAt: FieldRef<"UserProgress", 'DateTime'>
+    readonly updatedAt: FieldRef<"UserProgress", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * UserProgress findUnique
+   */
+  export type UserProgressFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserProgress
+     */
+    select?: UserProgressSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserProgress
+     */
+    omit?: UserProgressOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserProgressInclude<ExtArgs> | null
+    /**
+     * Filter, which UserProgress to fetch.
+     */
+    where: UserProgressWhereUniqueInput
+  }
+
+  /**
+   * UserProgress findUniqueOrThrow
+   */
+  export type UserProgressFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserProgress
+     */
+    select?: UserProgressSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserProgress
+     */
+    omit?: UserProgressOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserProgressInclude<ExtArgs> | null
+    /**
+     * Filter, which UserProgress to fetch.
+     */
+    where: UserProgressWhereUniqueInput
+  }
+
+  /**
+   * UserProgress findFirst
+   */
+  export type UserProgressFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserProgress
+     */
+    select?: UserProgressSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserProgress
+     */
+    omit?: UserProgressOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserProgressInclude<ExtArgs> | null
+    /**
+     * Filter, which UserProgress to fetch.
+     */
+    where?: UserProgressWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UserProgresses to fetch.
+     */
+    orderBy?: UserProgressOrderByWithRelationInput | UserProgressOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for UserProgresses.
+     */
+    cursor?: UserProgressWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UserProgresses from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UserProgresses.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of UserProgresses.
+     */
+    distinct?: UserProgressScalarFieldEnum | UserProgressScalarFieldEnum[]
+  }
+
+  /**
+   * UserProgress findFirstOrThrow
+   */
+  export type UserProgressFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserProgress
+     */
+    select?: UserProgressSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserProgress
+     */
+    omit?: UserProgressOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserProgressInclude<ExtArgs> | null
+    /**
+     * Filter, which UserProgress to fetch.
+     */
+    where?: UserProgressWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UserProgresses to fetch.
+     */
+    orderBy?: UserProgressOrderByWithRelationInput | UserProgressOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for UserProgresses.
+     */
+    cursor?: UserProgressWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UserProgresses from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UserProgresses.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of UserProgresses.
+     */
+    distinct?: UserProgressScalarFieldEnum | UserProgressScalarFieldEnum[]
+  }
+
+  /**
+   * UserProgress findMany
+   */
+  export type UserProgressFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserProgress
+     */
+    select?: UserProgressSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserProgress
+     */
+    omit?: UserProgressOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserProgressInclude<ExtArgs> | null
+    /**
+     * Filter, which UserProgresses to fetch.
+     */
+    where?: UserProgressWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of UserProgresses to fetch.
+     */
+    orderBy?: UserProgressOrderByWithRelationInput | UserProgressOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing UserProgresses.
+     */
+    cursor?: UserProgressWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` UserProgresses from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` UserProgresses.
+     */
+    skip?: number
+    distinct?: UserProgressScalarFieldEnum | UserProgressScalarFieldEnum[]
+  }
+
+  /**
+   * UserProgress create
+   */
+  export type UserProgressCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserProgress
+     */
+    select?: UserProgressSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserProgress
+     */
+    omit?: UserProgressOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserProgressInclude<ExtArgs> | null
+    /**
+     * The data needed to create a UserProgress.
+     */
+    data: XOR<UserProgressCreateInput, UserProgressUncheckedCreateInput>
+  }
+
+  /**
+   * UserProgress createMany
+   */
+  export type UserProgressCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many UserProgresses.
+     */
+    data: UserProgressCreateManyInput | UserProgressCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * UserProgress createManyAndReturn
+   */
+  export type UserProgressCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserProgress
+     */
+    select?: UserProgressSelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserProgress
+     */
+    omit?: UserProgressOmit<ExtArgs> | null
+    /**
+     * The data used to create many UserProgresses.
+     */
+    data: UserProgressCreateManyInput | UserProgressCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserProgressIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * UserProgress update
+   */
+  export type UserProgressUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserProgress
+     */
+    select?: UserProgressSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserProgress
+     */
+    omit?: UserProgressOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserProgressInclude<ExtArgs> | null
+    /**
+     * The data needed to update a UserProgress.
+     */
+    data: XOR<UserProgressUpdateInput, UserProgressUncheckedUpdateInput>
+    /**
+     * Choose, which UserProgress to update.
+     */
+    where: UserProgressWhereUniqueInput
+  }
+
+  /**
+   * UserProgress updateMany
+   */
+  export type UserProgressUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update UserProgresses.
+     */
+    data: XOR<UserProgressUpdateManyMutationInput, UserProgressUncheckedUpdateManyInput>
+    /**
+     * Filter which UserProgresses to update
+     */
+    where?: UserProgressWhereInput
+    /**
+     * Limit how many UserProgresses to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * UserProgress updateManyAndReturn
+   */
+  export type UserProgressUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserProgress
+     */
+    select?: UserProgressSelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserProgress
+     */
+    omit?: UserProgressOmit<ExtArgs> | null
+    /**
+     * The data used to update UserProgresses.
+     */
+    data: XOR<UserProgressUpdateManyMutationInput, UserProgressUncheckedUpdateManyInput>
+    /**
+     * Filter which UserProgresses to update
+     */
+    where?: UserProgressWhereInput
+    /**
+     * Limit how many UserProgresses to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserProgressIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * UserProgress upsert
+   */
+  export type UserProgressUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserProgress
+     */
+    select?: UserProgressSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserProgress
+     */
+    omit?: UserProgressOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserProgressInclude<ExtArgs> | null
+    /**
+     * The filter to search for the UserProgress to update in case it exists.
+     */
+    where: UserProgressWhereUniqueInput
+    /**
+     * In case the UserProgress found by the `where` argument doesn't exist, create a new UserProgress with this data.
+     */
+    create: XOR<UserProgressCreateInput, UserProgressUncheckedCreateInput>
+    /**
+     * In case the UserProgress was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<UserProgressUpdateInput, UserProgressUncheckedUpdateInput>
+  }
+
+  /**
+   * UserProgress delete
+   */
+  export type UserProgressDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserProgress
+     */
+    select?: UserProgressSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserProgress
+     */
+    omit?: UserProgressOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserProgressInclude<ExtArgs> | null
+    /**
+     * Filter which UserProgress to delete.
+     */
+    where: UserProgressWhereUniqueInput
+  }
+
+  /**
+   * UserProgress deleteMany
+   */
+  export type UserProgressDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which UserProgresses to delete
+     */
+    where?: UserProgressWhereInput
+    /**
+     * Limit how many UserProgresses to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * UserProgress without action
+   */
+  export type UserProgressDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the UserProgress
+     */
+    select?: UserProgressSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the UserProgress
+     */
+    omit?: UserProgressOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserProgressInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Enums
    */
 
@@ -4413,6 +8071,43 @@ export namespace Prisma {
   };
 
   export type AttachmentScalarFieldEnum = (typeof AttachmentScalarFieldEnum)[keyof typeof AttachmentScalarFieldEnum]
+
+
+  export const ChapterScalarFieldEnum: {
+    id: 'id',
+    title: 'title',
+    description: 'description',
+    videoUrl: 'videoUrl',
+    position: 'position',
+    isPublished: 'isPublished',
+    courseId: 'courseId',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type ChapterScalarFieldEnum = (typeof ChapterScalarFieldEnum)[keyof typeof ChapterScalarFieldEnum]
+
+
+  export const MuxDataScalarFieldEnum: {
+    id: 'id',
+    assetId: 'assetId',
+    playbackId: 'playbackId',
+    chapterId: 'chapterId'
+  };
+
+  export type MuxDataScalarFieldEnum = (typeof MuxDataScalarFieldEnum)[keyof typeof MuxDataScalarFieldEnum]
+
+
+  export const UserProgressScalarFieldEnum: {
+    id: 'id',
+    userId: 'userId',
+    chapterId: 'chapterId',
+    isComplete: 'isComplete',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type UserProgressScalarFieldEnum = (typeof UserProgressScalarFieldEnum)[keyof typeof UserProgressScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -4491,6 +8186,20 @@ export namespace Prisma {
    */
   export type ListIntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int[]'>
     
+
+
+  /**
+   * Reference to a field of type 'Float'
+   */
+  export type FloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float'>
+    
+
+
+  /**
+   * Reference to a field of type 'Float[]'
+   */
+  export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Float[]'>
+    
   /**
    * Deep Input Types
    */
@@ -4510,6 +8219,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Course"> | Date | string
     updatedAt?: DateTimeFilter<"Course"> | Date | string
     category?: XOR<CategoryNullableScalarRelationFilter, CategoryWhereInput> | null
+    chapters?: ChapterListRelationFilter
     attachments?: AttachmentListRelationFilter
   }
 
@@ -4524,6 +8234,7 @@ export namespace Prisma {
     createdAt?: SortOrder
     updatedAt?: SortOrder
     category?: CategoryOrderByWithRelationInput
+    chapters?: ChapterOrderByRelationAggregateInput
     attachments?: AttachmentOrderByRelationAggregateInput
   }
 
@@ -4541,6 +8252,7 @@ export namespace Prisma {
     createdAt?: DateTimeFilter<"Course"> | Date | string
     updatedAt?: DateTimeFilter<"Course"> | Date | string
     category?: XOR<CategoryNullableScalarRelationFilter, CategoryWhereInput> | null
+    chapters?: ChapterListRelationFilter
     attachments?: AttachmentListRelationFilter
   }, "id">
 
@@ -4674,6 +8386,200 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter<"Attachment"> | Date | string
   }
 
+  export type ChapterWhereInput = {
+    AND?: ChapterWhereInput | ChapterWhereInput[]
+    OR?: ChapterWhereInput[]
+    NOT?: ChapterWhereInput | ChapterWhereInput[]
+    id?: StringFilter<"Chapter"> | string
+    title?: StringFilter<"Chapter"> | string
+    description?: StringNullableFilter<"Chapter"> | string | null
+    videoUrl?: StringNullableFilter<"Chapter"> | string | null
+    position?: IntFilter<"Chapter"> | number
+    isPublished?: BoolFilter<"Chapter"> | boolean
+    courseId?: StringFilter<"Chapter"> | string
+    createdAt?: DateTimeFilter<"Chapter"> | Date | string
+    updatedAt?: DateTimeFilter<"Chapter"> | Date | string
+    muxData?: XOR<MuxDataNullableScalarRelationFilter, MuxDataWhereInput> | null
+    course?: XOR<CourseScalarRelationFilter, CourseWhereInput>
+    userProgress?: UserProgressListRelationFilter
+  }
+
+  export type ChapterOrderByWithRelationInput = {
+    id?: SortOrder
+    title?: SortOrder
+    description?: SortOrderInput | SortOrder
+    videoUrl?: SortOrderInput | SortOrder
+    position?: SortOrder
+    isPublished?: SortOrder
+    courseId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    muxData?: MuxDataOrderByWithRelationInput
+    course?: CourseOrderByWithRelationInput
+    userProgress?: UserProgressOrderByRelationAggregateInput
+  }
+
+  export type ChapterWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    AND?: ChapterWhereInput | ChapterWhereInput[]
+    OR?: ChapterWhereInput[]
+    NOT?: ChapterWhereInput | ChapterWhereInput[]
+    title?: StringFilter<"Chapter"> | string
+    description?: StringNullableFilter<"Chapter"> | string | null
+    videoUrl?: StringNullableFilter<"Chapter"> | string | null
+    position?: IntFilter<"Chapter"> | number
+    isPublished?: BoolFilter<"Chapter"> | boolean
+    courseId?: StringFilter<"Chapter"> | string
+    createdAt?: DateTimeFilter<"Chapter"> | Date | string
+    updatedAt?: DateTimeFilter<"Chapter"> | Date | string
+    muxData?: XOR<MuxDataNullableScalarRelationFilter, MuxDataWhereInput> | null
+    course?: XOR<CourseScalarRelationFilter, CourseWhereInput>
+    userProgress?: UserProgressListRelationFilter
+  }, "id">
+
+  export type ChapterOrderByWithAggregationInput = {
+    id?: SortOrder
+    title?: SortOrder
+    description?: SortOrderInput | SortOrder
+    videoUrl?: SortOrderInput | SortOrder
+    position?: SortOrder
+    isPublished?: SortOrder
+    courseId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: ChapterCountOrderByAggregateInput
+    _avg?: ChapterAvgOrderByAggregateInput
+    _max?: ChapterMaxOrderByAggregateInput
+    _min?: ChapterMinOrderByAggregateInput
+    _sum?: ChapterSumOrderByAggregateInput
+  }
+
+  export type ChapterScalarWhereWithAggregatesInput = {
+    AND?: ChapterScalarWhereWithAggregatesInput | ChapterScalarWhereWithAggregatesInput[]
+    OR?: ChapterScalarWhereWithAggregatesInput[]
+    NOT?: ChapterScalarWhereWithAggregatesInput | ChapterScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"Chapter"> | string
+    title?: StringWithAggregatesFilter<"Chapter"> | string
+    description?: StringNullableWithAggregatesFilter<"Chapter"> | string | null
+    videoUrl?: StringNullableWithAggregatesFilter<"Chapter"> | string | null
+    position?: IntWithAggregatesFilter<"Chapter"> | number
+    isPublished?: BoolWithAggregatesFilter<"Chapter"> | boolean
+    courseId?: StringWithAggregatesFilter<"Chapter"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"Chapter"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Chapter"> | Date | string
+  }
+
+  export type MuxDataWhereInput = {
+    AND?: MuxDataWhereInput | MuxDataWhereInput[]
+    OR?: MuxDataWhereInput[]
+    NOT?: MuxDataWhereInput | MuxDataWhereInput[]
+    id?: StringFilter<"MuxData"> | string
+    assetId?: StringFilter<"MuxData"> | string
+    playbackId?: StringNullableFilter<"MuxData"> | string | null
+    chapterId?: StringFilter<"MuxData"> | string
+    chapter?: XOR<ChapterScalarRelationFilter, ChapterWhereInput>
+  }
+
+  export type MuxDataOrderByWithRelationInput = {
+    id?: SortOrder
+    assetId?: SortOrder
+    playbackId?: SortOrderInput | SortOrder
+    chapterId?: SortOrder
+    chapter?: ChapterOrderByWithRelationInput
+  }
+
+  export type MuxDataWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    chapterId?: string
+    AND?: MuxDataWhereInput | MuxDataWhereInput[]
+    OR?: MuxDataWhereInput[]
+    NOT?: MuxDataWhereInput | MuxDataWhereInput[]
+    assetId?: StringFilter<"MuxData"> | string
+    playbackId?: StringNullableFilter<"MuxData"> | string | null
+    chapter?: XOR<ChapterScalarRelationFilter, ChapterWhereInput>
+  }, "id" | "chapterId">
+
+  export type MuxDataOrderByWithAggregationInput = {
+    id?: SortOrder
+    assetId?: SortOrder
+    playbackId?: SortOrderInput | SortOrder
+    chapterId?: SortOrder
+    _count?: MuxDataCountOrderByAggregateInput
+    _max?: MuxDataMaxOrderByAggregateInput
+    _min?: MuxDataMinOrderByAggregateInput
+  }
+
+  export type MuxDataScalarWhereWithAggregatesInput = {
+    AND?: MuxDataScalarWhereWithAggregatesInput | MuxDataScalarWhereWithAggregatesInput[]
+    OR?: MuxDataScalarWhereWithAggregatesInput[]
+    NOT?: MuxDataScalarWhereWithAggregatesInput | MuxDataScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"MuxData"> | string
+    assetId?: StringWithAggregatesFilter<"MuxData"> | string
+    playbackId?: StringNullableWithAggregatesFilter<"MuxData"> | string | null
+    chapterId?: StringWithAggregatesFilter<"MuxData"> | string
+  }
+
+  export type UserProgressWhereInput = {
+    AND?: UserProgressWhereInput | UserProgressWhereInput[]
+    OR?: UserProgressWhereInput[]
+    NOT?: UserProgressWhereInput | UserProgressWhereInput[]
+    id?: StringFilter<"UserProgress"> | string
+    userId?: StringFilter<"UserProgress"> | string
+    chapterId?: StringFilter<"UserProgress"> | string
+    isComplete?: BoolFilter<"UserProgress"> | boolean
+    createdAt?: DateTimeFilter<"UserProgress"> | Date | string
+    updatedAt?: DateTimeFilter<"UserProgress"> | Date | string
+    chapter?: XOR<ChapterScalarRelationFilter, ChapterWhereInput>
+  }
+
+  export type UserProgressOrderByWithRelationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    chapterId?: SortOrder
+    isComplete?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    chapter?: ChapterOrderByWithRelationInput
+  }
+
+  export type UserProgressWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    userId_chapterId?: UserProgressUserIdChapterIdCompoundUniqueInput
+    AND?: UserProgressWhereInput | UserProgressWhereInput[]
+    OR?: UserProgressWhereInput[]
+    NOT?: UserProgressWhereInput | UserProgressWhereInput[]
+    userId?: StringFilter<"UserProgress"> | string
+    chapterId?: StringFilter<"UserProgress"> | string
+    isComplete?: BoolFilter<"UserProgress"> | boolean
+    createdAt?: DateTimeFilter<"UserProgress"> | Date | string
+    updatedAt?: DateTimeFilter<"UserProgress"> | Date | string
+    chapter?: XOR<ChapterScalarRelationFilter, ChapterWhereInput>
+  }, "id" | "userId_chapterId">
+
+  export type UserProgressOrderByWithAggregationInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    chapterId?: SortOrder
+    isComplete?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: UserProgressCountOrderByAggregateInput
+    _max?: UserProgressMaxOrderByAggregateInput
+    _min?: UserProgressMinOrderByAggregateInput
+  }
+
+  export type UserProgressScalarWhereWithAggregatesInput = {
+    AND?: UserProgressScalarWhereWithAggregatesInput | UserProgressScalarWhereWithAggregatesInput[]
+    OR?: UserProgressScalarWhereWithAggregatesInput[]
+    NOT?: UserProgressScalarWhereWithAggregatesInput | UserProgressScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"UserProgress"> | string
+    userId?: StringWithAggregatesFilter<"UserProgress"> | string
+    chapterId?: StringWithAggregatesFilter<"UserProgress"> | string
+    isComplete?: BoolWithAggregatesFilter<"UserProgress"> | boolean
+    createdAt?: DateTimeWithAggregatesFilter<"UserProgress"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"UserProgress"> | Date | string
+  }
+
   export type CourseCreateInput = {
     id?: string
     userId: string
@@ -4684,6 +8590,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     category?: CategoryCreateNestedOneWithoutCoursesInput
+    chapters?: ChapterCreateNestedManyWithoutCourseInput
     attachments?: AttachmentCreateNestedManyWithoutCourseInput
   }
 
@@ -4697,6 +8604,7 @@ export namespace Prisma {
     categoryId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    chapters?: ChapterUncheckedCreateNestedManyWithoutCourseInput
     attachments?: AttachmentUncheckedCreateNestedManyWithoutCourseInput
   }
 
@@ -4710,6 +8618,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     category?: CategoryUpdateOneWithoutCoursesNestedInput
+    chapters?: ChapterUpdateManyWithoutCourseNestedInput
     attachments?: AttachmentUpdateManyWithoutCourseNestedInput
   }
 
@@ -4723,6 +8632,7 @@ export namespace Prisma {
     categoryId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    chapters?: ChapterUncheckedUpdateManyWithoutCourseNestedInput
     attachments?: AttachmentUncheckedUpdateManyWithoutCourseNestedInput
   }
 
@@ -4862,6 +8772,207 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
+  export type ChapterCreateInput = {
+    id?: string
+    title: string
+    description?: string | null
+    videoUrl?: string | null
+    position: number
+    isPublished?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    muxData?: MuxDataCreateNestedOneWithoutChapterInput
+    course: CourseCreateNestedOneWithoutChaptersInput
+    userProgress?: UserProgressCreateNestedManyWithoutChapterInput
+  }
+
+  export type ChapterUncheckedCreateInput = {
+    id?: string
+    title: string
+    description?: string | null
+    videoUrl?: string | null
+    position: number
+    isPublished?: boolean
+    courseId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    muxData?: MuxDataUncheckedCreateNestedOneWithoutChapterInput
+    userProgress?: UserProgressUncheckedCreateNestedManyWithoutChapterInput
+  }
+
+  export type ChapterUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    videoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    position?: IntFieldUpdateOperationsInput | number
+    isPublished?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    muxData?: MuxDataUpdateOneWithoutChapterNestedInput
+    course?: CourseUpdateOneRequiredWithoutChaptersNestedInput
+    userProgress?: UserProgressUpdateManyWithoutChapterNestedInput
+  }
+
+  export type ChapterUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    videoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    position?: IntFieldUpdateOperationsInput | number
+    isPublished?: BoolFieldUpdateOperationsInput | boolean
+    courseId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    muxData?: MuxDataUncheckedUpdateOneWithoutChapterNestedInput
+    userProgress?: UserProgressUncheckedUpdateManyWithoutChapterNestedInput
+  }
+
+  export type ChapterCreateManyInput = {
+    id?: string
+    title: string
+    description?: string | null
+    videoUrl?: string | null
+    position: number
+    isPublished?: boolean
+    courseId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type ChapterUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    videoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    position?: IntFieldUpdateOperationsInput | number
+    isPublished?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type ChapterUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    videoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    position?: IntFieldUpdateOperationsInput | number
+    isPublished?: BoolFieldUpdateOperationsInput | boolean
+    courseId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type MuxDataCreateInput = {
+    id?: string
+    assetId: string
+    playbackId?: string | null
+    chapter: ChapterCreateNestedOneWithoutMuxDataInput
+  }
+
+  export type MuxDataUncheckedCreateInput = {
+    id?: string
+    assetId: string
+    playbackId?: string | null
+    chapterId: string
+  }
+
+  export type MuxDataUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    assetId?: StringFieldUpdateOperationsInput | string
+    playbackId?: NullableStringFieldUpdateOperationsInput | string | null
+    chapter?: ChapterUpdateOneRequiredWithoutMuxDataNestedInput
+  }
+
+  export type MuxDataUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    assetId?: StringFieldUpdateOperationsInput | string
+    playbackId?: NullableStringFieldUpdateOperationsInput | string | null
+    chapterId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type MuxDataCreateManyInput = {
+    id?: string
+    assetId: string
+    playbackId?: string | null
+    chapterId: string
+  }
+
+  export type MuxDataUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    assetId?: StringFieldUpdateOperationsInput | string
+    playbackId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type MuxDataUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    assetId?: StringFieldUpdateOperationsInput | string
+    playbackId?: NullableStringFieldUpdateOperationsInput | string | null
+    chapterId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type UserProgressCreateInput = {
+    id?: string
+    userId: string
+    isComplete?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    chapter: ChapterCreateNestedOneWithoutUserProgressInput
+  }
+
+  export type UserProgressUncheckedCreateInput = {
+    id?: string
+    userId: string
+    chapterId: string
+    isComplete?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type UserProgressUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    isComplete?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    chapter?: ChapterUpdateOneRequiredWithoutUserProgressNestedInput
+  }
+
+  export type UserProgressUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    chapterId?: StringFieldUpdateOperationsInput | string
+    isComplete?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserProgressCreateManyInput = {
+    id?: string
+    userId: string
+    chapterId: string
+    isComplete?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type UserProgressUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    isComplete?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserProgressUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    chapterId?: StringFieldUpdateOperationsInput | string
+    isComplete?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type StringFilter<$PrismaModel = never> = {
     equals?: string | StringFieldRefInput<$PrismaModel>
     in?: string[] | ListStringFieldRefInput<$PrismaModel>
@@ -4913,6 +9024,12 @@ export namespace Prisma {
     isNot?: CategoryWhereInput | null
   }
 
+  export type ChapterListRelationFilter = {
+    every?: ChapterWhereInput
+    some?: ChapterWhereInput
+    none?: ChapterWhereInput
+  }
+
   export type AttachmentListRelationFilter = {
     every?: AttachmentWhereInput
     some?: AttachmentWhereInput
@@ -4922,6 +9039,10 @@ export namespace Prisma {
   export type SortOrderInput = {
     sort: SortOrder
     nulls?: NullsOrder
+  }
+
+  export type ChapterOrderByRelationAggregateInput = {
+    _count?: SortOrder
   }
 
   export type AttachmentOrderByRelationAggregateInput = {
@@ -5079,10 +9200,161 @@ export namespace Prisma {
     updatedAt?: SortOrder
   }
 
+  export type IntFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntFilter<$PrismaModel> | number
+  }
+
+  export type MuxDataNullableScalarRelationFilter = {
+    is?: MuxDataWhereInput | null
+    isNot?: MuxDataWhereInput | null
+  }
+
+  export type UserProgressListRelationFilter = {
+    every?: UserProgressWhereInput
+    some?: UserProgressWhereInput
+    none?: UserProgressWhereInput
+  }
+
+  export type UserProgressOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type ChapterCountOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    videoUrl?: SortOrder
+    position?: SortOrder
+    isPublished?: SortOrder
+    courseId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ChapterAvgOrderByAggregateInput = {
+    position?: SortOrder
+  }
+
+  export type ChapterMaxOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    videoUrl?: SortOrder
+    position?: SortOrder
+    isPublished?: SortOrder
+    courseId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ChapterMinOrderByAggregateInput = {
+    id?: SortOrder
+    title?: SortOrder
+    description?: SortOrder
+    videoUrl?: SortOrder
+    position?: SortOrder
+    isPublished?: SortOrder
+    courseId?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type ChapterSumOrderByAggregateInput = {
+    position?: SortOrder
+  }
+
+  export type IntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
+  }
+
+  export type ChapterScalarRelationFilter = {
+    is?: ChapterWhereInput
+    isNot?: ChapterWhereInput
+  }
+
+  export type MuxDataCountOrderByAggregateInput = {
+    id?: SortOrder
+    assetId?: SortOrder
+    playbackId?: SortOrder
+    chapterId?: SortOrder
+  }
+
+  export type MuxDataMaxOrderByAggregateInput = {
+    id?: SortOrder
+    assetId?: SortOrder
+    playbackId?: SortOrder
+    chapterId?: SortOrder
+  }
+
+  export type MuxDataMinOrderByAggregateInput = {
+    id?: SortOrder
+    assetId?: SortOrder
+    playbackId?: SortOrder
+    chapterId?: SortOrder
+  }
+
+  export type UserProgressUserIdChapterIdCompoundUniqueInput = {
+    userId: string
+    chapterId: string
+  }
+
+  export type UserProgressCountOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    chapterId?: SortOrder
+    isComplete?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type UserProgressMaxOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    chapterId?: SortOrder
+    isComplete?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type UserProgressMinOrderByAggregateInput = {
+    id?: SortOrder
+    userId?: SortOrder
+    chapterId?: SortOrder
+    isComplete?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
   export type CategoryCreateNestedOneWithoutCoursesInput = {
     create?: XOR<CategoryCreateWithoutCoursesInput, CategoryUncheckedCreateWithoutCoursesInput>
     connectOrCreate?: CategoryCreateOrConnectWithoutCoursesInput
     connect?: CategoryWhereUniqueInput
+  }
+
+  export type ChapterCreateNestedManyWithoutCourseInput = {
+    create?: XOR<ChapterCreateWithoutCourseInput, ChapterUncheckedCreateWithoutCourseInput> | ChapterCreateWithoutCourseInput[] | ChapterUncheckedCreateWithoutCourseInput[]
+    connectOrCreate?: ChapterCreateOrConnectWithoutCourseInput | ChapterCreateOrConnectWithoutCourseInput[]
+    createMany?: ChapterCreateManyCourseInputEnvelope
+    connect?: ChapterWhereUniqueInput | ChapterWhereUniqueInput[]
   }
 
   export type AttachmentCreateNestedManyWithoutCourseInput = {
@@ -5090,6 +9362,13 @@ export namespace Prisma {
     connectOrCreate?: AttachmentCreateOrConnectWithoutCourseInput | AttachmentCreateOrConnectWithoutCourseInput[]
     createMany?: AttachmentCreateManyCourseInputEnvelope
     connect?: AttachmentWhereUniqueInput | AttachmentWhereUniqueInput[]
+  }
+
+  export type ChapterUncheckedCreateNestedManyWithoutCourseInput = {
+    create?: XOR<ChapterCreateWithoutCourseInput, ChapterUncheckedCreateWithoutCourseInput> | ChapterCreateWithoutCourseInput[] | ChapterUncheckedCreateWithoutCourseInput[]
+    connectOrCreate?: ChapterCreateOrConnectWithoutCourseInput | ChapterCreateOrConnectWithoutCourseInput[]
+    createMany?: ChapterCreateManyCourseInputEnvelope
+    connect?: ChapterWhereUniqueInput | ChapterWhereUniqueInput[]
   }
 
   export type AttachmentUncheckedCreateNestedManyWithoutCourseInput = {
@@ -5125,6 +9404,20 @@ export namespace Prisma {
     update?: XOR<XOR<CategoryUpdateToOneWithWhereWithoutCoursesInput, CategoryUpdateWithoutCoursesInput>, CategoryUncheckedUpdateWithoutCoursesInput>
   }
 
+  export type ChapterUpdateManyWithoutCourseNestedInput = {
+    create?: XOR<ChapterCreateWithoutCourseInput, ChapterUncheckedCreateWithoutCourseInput> | ChapterCreateWithoutCourseInput[] | ChapterUncheckedCreateWithoutCourseInput[]
+    connectOrCreate?: ChapterCreateOrConnectWithoutCourseInput | ChapterCreateOrConnectWithoutCourseInput[]
+    upsert?: ChapterUpsertWithWhereUniqueWithoutCourseInput | ChapterUpsertWithWhereUniqueWithoutCourseInput[]
+    createMany?: ChapterCreateManyCourseInputEnvelope
+    set?: ChapterWhereUniqueInput | ChapterWhereUniqueInput[]
+    disconnect?: ChapterWhereUniqueInput | ChapterWhereUniqueInput[]
+    delete?: ChapterWhereUniqueInput | ChapterWhereUniqueInput[]
+    connect?: ChapterWhereUniqueInput | ChapterWhereUniqueInput[]
+    update?: ChapterUpdateWithWhereUniqueWithoutCourseInput | ChapterUpdateWithWhereUniqueWithoutCourseInput[]
+    updateMany?: ChapterUpdateManyWithWhereWithoutCourseInput | ChapterUpdateManyWithWhereWithoutCourseInput[]
+    deleteMany?: ChapterScalarWhereInput | ChapterScalarWhereInput[]
+  }
+
   export type AttachmentUpdateManyWithoutCourseNestedInput = {
     create?: XOR<AttachmentCreateWithoutCourseInput, AttachmentUncheckedCreateWithoutCourseInput> | AttachmentCreateWithoutCourseInput[] | AttachmentUncheckedCreateWithoutCourseInput[]
     connectOrCreate?: AttachmentCreateOrConnectWithoutCourseInput | AttachmentCreateOrConnectWithoutCourseInput[]
@@ -5137,6 +9430,20 @@ export namespace Prisma {
     update?: AttachmentUpdateWithWhereUniqueWithoutCourseInput | AttachmentUpdateWithWhereUniqueWithoutCourseInput[]
     updateMany?: AttachmentUpdateManyWithWhereWithoutCourseInput | AttachmentUpdateManyWithWhereWithoutCourseInput[]
     deleteMany?: AttachmentScalarWhereInput | AttachmentScalarWhereInput[]
+  }
+
+  export type ChapterUncheckedUpdateManyWithoutCourseNestedInput = {
+    create?: XOR<ChapterCreateWithoutCourseInput, ChapterUncheckedCreateWithoutCourseInput> | ChapterCreateWithoutCourseInput[] | ChapterUncheckedCreateWithoutCourseInput[]
+    connectOrCreate?: ChapterCreateOrConnectWithoutCourseInput | ChapterCreateOrConnectWithoutCourseInput[]
+    upsert?: ChapterUpsertWithWhereUniqueWithoutCourseInput | ChapterUpsertWithWhereUniqueWithoutCourseInput[]
+    createMany?: ChapterCreateManyCourseInputEnvelope
+    set?: ChapterWhereUniqueInput | ChapterWhereUniqueInput[]
+    disconnect?: ChapterWhereUniqueInput | ChapterWhereUniqueInput[]
+    delete?: ChapterWhereUniqueInput | ChapterWhereUniqueInput[]
+    connect?: ChapterWhereUniqueInput | ChapterWhereUniqueInput[]
+    update?: ChapterUpdateWithWhereUniqueWithoutCourseInput | ChapterUpdateWithWhereUniqueWithoutCourseInput[]
+    updateMany?: ChapterUpdateManyWithWhereWithoutCourseInput | ChapterUpdateManyWithWhereWithoutCourseInput[]
+    deleteMany?: ChapterScalarWhereInput | ChapterScalarWhereInput[]
   }
 
   export type AttachmentUncheckedUpdateManyWithoutCourseNestedInput = {
@@ -5207,6 +9514,130 @@ export namespace Prisma {
     upsert?: CourseUpsertWithoutAttachmentsInput
     connect?: CourseWhereUniqueInput
     update?: XOR<XOR<CourseUpdateToOneWithWhereWithoutAttachmentsInput, CourseUpdateWithoutAttachmentsInput>, CourseUncheckedUpdateWithoutAttachmentsInput>
+  }
+
+  export type MuxDataCreateNestedOneWithoutChapterInput = {
+    create?: XOR<MuxDataCreateWithoutChapterInput, MuxDataUncheckedCreateWithoutChapterInput>
+    connectOrCreate?: MuxDataCreateOrConnectWithoutChapterInput
+    connect?: MuxDataWhereUniqueInput
+  }
+
+  export type CourseCreateNestedOneWithoutChaptersInput = {
+    create?: XOR<CourseCreateWithoutChaptersInput, CourseUncheckedCreateWithoutChaptersInput>
+    connectOrCreate?: CourseCreateOrConnectWithoutChaptersInput
+    connect?: CourseWhereUniqueInput
+  }
+
+  export type UserProgressCreateNestedManyWithoutChapterInput = {
+    create?: XOR<UserProgressCreateWithoutChapterInput, UserProgressUncheckedCreateWithoutChapterInput> | UserProgressCreateWithoutChapterInput[] | UserProgressUncheckedCreateWithoutChapterInput[]
+    connectOrCreate?: UserProgressCreateOrConnectWithoutChapterInput | UserProgressCreateOrConnectWithoutChapterInput[]
+    createMany?: UserProgressCreateManyChapterInputEnvelope
+    connect?: UserProgressWhereUniqueInput | UserProgressWhereUniqueInput[]
+  }
+
+  export type MuxDataUncheckedCreateNestedOneWithoutChapterInput = {
+    create?: XOR<MuxDataCreateWithoutChapterInput, MuxDataUncheckedCreateWithoutChapterInput>
+    connectOrCreate?: MuxDataCreateOrConnectWithoutChapterInput
+    connect?: MuxDataWhereUniqueInput
+  }
+
+  export type UserProgressUncheckedCreateNestedManyWithoutChapterInput = {
+    create?: XOR<UserProgressCreateWithoutChapterInput, UserProgressUncheckedCreateWithoutChapterInput> | UserProgressCreateWithoutChapterInput[] | UserProgressUncheckedCreateWithoutChapterInput[]
+    connectOrCreate?: UserProgressCreateOrConnectWithoutChapterInput | UserProgressCreateOrConnectWithoutChapterInput[]
+    createMany?: UserProgressCreateManyChapterInputEnvelope
+    connect?: UserProgressWhereUniqueInput | UserProgressWhereUniqueInput[]
+  }
+
+  export type IntFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
+  }
+
+  export type MuxDataUpdateOneWithoutChapterNestedInput = {
+    create?: XOR<MuxDataCreateWithoutChapterInput, MuxDataUncheckedCreateWithoutChapterInput>
+    connectOrCreate?: MuxDataCreateOrConnectWithoutChapterInput
+    upsert?: MuxDataUpsertWithoutChapterInput
+    disconnect?: MuxDataWhereInput | boolean
+    delete?: MuxDataWhereInput | boolean
+    connect?: MuxDataWhereUniqueInput
+    update?: XOR<XOR<MuxDataUpdateToOneWithWhereWithoutChapterInput, MuxDataUpdateWithoutChapterInput>, MuxDataUncheckedUpdateWithoutChapterInput>
+  }
+
+  export type CourseUpdateOneRequiredWithoutChaptersNestedInput = {
+    create?: XOR<CourseCreateWithoutChaptersInput, CourseUncheckedCreateWithoutChaptersInput>
+    connectOrCreate?: CourseCreateOrConnectWithoutChaptersInput
+    upsert?: CourseUpsertWithoutChaptersInput
+    connect?: CourseWhereUniqueInput
+    update?: XOR<XOR<CourseUpdateToOneWithWhereWithoutChaptersInput, CourseUpdateWithoutChaptersInput>, CourseUncheckedUpdateWithoutChaptersInput>
+  }
+
+  export type UserProgressUpdateManyWithoutChapterNestedInput = {
+    create?: XOR<UserProgressCreateWithoutChapterInput, UserProgressUncheckedCreateWithoutChapterInput> | UserProgressCreateWithoutChapterInput[] | UserProgressUncheckedCreateWithoutChapterInput[]
+    connectOrCreate?: UserProgressCreateOrConnectWithoutChapterInput | UserProgressCreateOrConnectWithoutChapterInput[]
+    upsert?: UserProgressUpsertWithWhereUniqueWithoutChapterInput | UserProgressUpsertWithWhereUniqueWithoutChapterInput[]
+    createMany?: UserProgressCreateManyChapterInputEnvelope
+    set?: UserProgressWhereUniqueInput | UserProgressWhereUniqueInput[]
+    disconnect?: UserProgressWhereUniqueInput | UserProgressWhereUniqueInput[]
+    delete?: UserProgressWhereUniqueInput | UserProgressWhereUniqueInput[]
+    connect?: UserProgressWhereUniqueInput | UserProgressWhereUniqueInput[]
+    update?: UserProgressUpdateWithWhereUniqueWithoutChapterInput | UserProgressUpdateWithWhereUniqueWithoutChapterInput[]
+    updateMany?: UserProgressUpdateManyWithWhereWithoutChapterInput | UserProgressUpdateManyWithWhereWithoutChapterInput[]
+    deleteMany?: UserProgressScalarWhereInput | UserProgressScalarWhereInput[]
+  }
+
+  export type MuxDataUncheckedUpdateOneWithoutChapterNestedInput = {
+    create?: XOR<MuxDataCreateWithoutChapterInput, MuxDataUncheckedCreateWithoutChapterInput>
+    connectOrCreate?: MuxDataCreateOrConnectWithoutChapterInput
+    upsert?: MuxDataUpsertWithoutChapterInput
+    disconnect?: MuxDataWhereInput | boolean
+    delete?: MuxDataWhereInput | boolean
+    connect?: MuxDataWhereUniqueInput
+    update?: XOR<XOR<MuxDataUpdateToOneWithWhereWithoutChapterInput, MuxDataUpdateWithoutChapterInput>, MuxDataUncheckedUpdateWithoutChapterInput>
+  }
+
+  export type UserProgressUncheckedUpdateManyWithoutChapterNestedInput = {
+    create?: XOR<UserProgressCreateWithoutChapterInput, UserProgressUncheckedCreateWithoutChapterInput> | UserProgressCreateWithoutChapterInput[] | UserProgressUncheckedCreateWithoutChapterInput[]
+    connectOrCreate?: UserProgressCreateOrConnectWithoutChapterInput | UserProgressCreateOrConnectWithoutChapterInput[]
+    upsert?: UserProgressUpsertWithWhereUniqueWithoutChapterInput | UserProgressUpsertWithWhereUniqueWithoutChapterInput[]
+    createMany?: UserProgressCreateManyChapterInputEnvelope
+    set?: UserProgressWhereUniqueInput | UserProgressWhereUniqueInput[]
+    disconnect?: UserProgressWhereUniqueInput | UserProgressWhereUniqueInput[]
+    delete?: UserProgressWhereUniqueInput | UserProgressWhereUniqueInput[]
+    connect?: UserProgressWhereUniqueInput | UserProgressWhereUniqueInput[]
+    update?: UserProgressUpdateWithWhereUniqueWithoutChapterInput | UserProgressUpdateWithWhereUniqueWithoutChapterInput[]
+    updateMany?: UserProgressUpdateManyWithWhereWithoutChapterInput | UserProgressUpdateManyWithWhereWithoutChapterInput[]
+    deleteMany?: UserProgressScalarWhereInput | UserProgressScalarWhereInput[]
+  }
+
+  export type ChapterCreateNestedOneWithoutMuxDataInput = {
+    create?: XOR<ChapterCreateWithoutMuxDataInput, ChapterUncheckedCreateWithoutMuxDataInput>
+    connectOrCreate?: ChapterCreateOrConnectWithoutMuxDataInput
+    connect?: ChapterWhereUniqueInput
+  }
+
+  export type ChapterUpdateOneRequiredWithoutMuxDataNestedInput = {
+    create?: XOR<ChapterCreateWithoutMuxDataInput, ChapterUncheckedCreateWithoutMuxDataInput>
+    connectOrCreate?: ChapterCreateOrConnectWithoutMuxDataInput
+    upsert?: ChapterUpsertWithoutMuxDataInput
+    connect?: ChapterWhereUniqueInput
+    update?: XOR<XOR<ChapterUpdateToOneWithWhereWithoutMuxDataInput, ChapterUpdateWithoutMuxDataInput>, ChapterUncheckedUpdateWithoutMuxDataInput>
+  }
+
+  export type ChapterCreateNestedOneWithoutUserProgressInput = {
+    create?: XOR<ChapterCreateWithoutUserProgressInput, ChapterUncheckedCreateWithoutUserProgressInput>
+    connectOrCreate?: ChapterCreateOrConnectWithoutUserProgressInput
+    connect?: ChapterWhereUniqueInput
+  }
+
+  export type ChapterUpdateOneRequiredWithoutUserProgressNestedInput = {
+    create?: XOR<ChapterCreateWithoutUserProgressInput, ChapterUncheckedCreateWithoutUserProgressInput>
+    connectOrCreate?: ChapterCreateOrConnectWithoutUserProgressInput
+    upsert?: ChapterUpsertWithoutUserProgressInput
+    connect?: ChapterWhereUniqueInput
+    update?: XOR<XOR<ChapterUpdateToOneWithWhereWithoutUserProgressInput, ChapterUpdateWithoutUserProgressInput>, ChapterUncheckedUpdateWithoutUserProgressInput>
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -5331,6 +9762,33 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
+  export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
+  }
+
+  export type NestedFloatFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatFilter<$PrismaModel> | number
+  }
+
   export type CategoryCreateWithoutCoursesInput = {
     id?: string
     name: string
@@ -5344,6 +9802,42 @@ export namespace Prisma {
   export type CategoryCreateOrConnectWithoutCoursesInput = {
     where: CategoryWhereUniqueInput
     create: XOR<CategoryCreateWithoutCoursesInput, CategoryUncheckedCreateWithoutCoursesInput>
+  }
+
+  export type ChapterCreateWithoutCourseInput = {
+    id?: string
+    title: string
+    description?: string | null
+    videoUrl?: string | null
+    position: number
+    isPublished?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    muxData?: MuxDataCreateNestedOneWithoutChapterInput
+    userProgress?: UserProgressCreateNestedManyWithoutChapterInput
+  }
+
+  export type ChapterUncheckedCreateWithoutCourseInput = {
+    id?: string
+    title: string
+    description?: string | null
+    videoUrl?: string | null
+    position: number
+    isPublished?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    muxData?: MuxDataUncheckedCreateNestedOneWithoutChapterInput
+    userProgress?: UserProgressUncheckedCreateNestedManyWithoutChapterInput
+  }
+
+  export type ChapterCreateOrConnectWithoutCourseInput = {
+    where: ChapterWhereUniqueInput
+    create: XOR<ChapterCreateWithoutCourseInput, ChapterUncheckedCreateWithoutCourseInput>
+  }
+
+  export type ChapterCreateManyCourseInputEnvelope = {
+    data: ChapterCreateManyCourseInput | ChapterCreateManyCourseInput[]
+    skipDuplicates?: boolean
   }
 
   export type AttachmentCreateWithoutCourseInput = {
@@ -5393,6 +9887,37 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
   }
 
+  export type ChapterUpsertWithWhereUniqueWithoutCourseInput = {
+    where: ChapterWhereUniqueInput
+    update: XOR<ChapterUpdateWithoutCourseInput, ChapterUncheckedUpdateWithoutCourseInput>
+    create: XOR<ChapterCreateWithoutCourseInput, ChapterUncheckedCreateWithoutCourseInput>
+  }
+
+  export type ChapterUpdateWithWhereUniqueWithoutCourseInput = {
+    where: ChapterWhereUniqueInput
+    data: XOR<ChapterUpdateWithoutCourseInput, ChapterUncheckedUpdateWithoutCourseInput>
+  }
+
+  export type ChapterUpdateManyWithWhereWithoutCourseInput = {
+    where: ChapterScalarWhereInput
+    data: XOR<ChapterUpdateManyMutationInput, ChapterUncheckedUpdateManyWithoutCourseInput>
+  }
+
+  export type ChapterScalarWhereInput = {
+    AND?: ChapterScalarWhereInput | ChapterScalarWhereInput[]
+    OR?: ChapterScalarWhereInput[]
+    NOT?: ChapterScalarWhereInput | ChapterScalarWhereInput[]
+    id?: StringFilter<"Chapter"> | string
+    title?: StringFilter<"Chapter"> | string
+    description?: StringNullableFilter<"Chapter"> | string | null
+    videoUrl?: StringNullableFilter<"Chapter"> | string | null
+    position?: IntFilter<"Chapter"> | number
+    isPublished?: BoolFilter<"Chapter"> | boolean
+    courseId?: StringFilter<"Chapter"> | string
+    createdAt?: DateTimeFilter<"Chapter"> | Date | string
+    updatedAt?: DateTimeFilter<"Chapter"> | Date | string
+  }
+
   export type AttachmentUpsertWithWhereUniqueWithoutCourseInput = {
     where: AttachmentWhereUniqueInput
     update: XOR<AttachmentUpdateWithoutCourseInput, AttachmentUncheckedUpdateWithoutCourseInput>
@@ -5430,6 +9955,7 @@ export namespace Prisma {
     isPublished?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    chapters?: ChapterCreateNestedManyWithoutCourseInput
     attachments?: AttachmentCreateNestedManyWithoutCourseInput
   }
 
@@ -5442,6 +9968,7 @@ export namespace Prisma {
     isPublished?: boolean
     createdAt?: Date | string
     updatedAt?: Date | string
+    chapters?: ChapterUncheckedCreateNestedManyWithoutCourseInput
     attachments?: AttachmentUncheckedCreateNestedManyWithoutCourseInput
   }
 
@@ -5496,6 +10023,7 @@ export namespace Prisma {
     createdAt?: Date | string
     updatedAt?: Date | string
     category?: CategoryCreateNestedOneWithoutCoursesInput
+    chapters?: ChapterCreateNestedManyWithoutCourseInput
   }
 
   export type CourseUncheckedCreateWithoutAttachmentsInput = {
@@ -5508,6 +10036,7 @@ export namespace Prisma {
     categoryId?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    chapters?: ChapterUncheckedCreateNestedManyWithoutCourseInput
   }
 
   export type CourseCreateOrConnectWithoutAttachmentsInput = {
@@ -5536,6 +10065,7 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     category?: CategoryUpdateOneWithoutCoursesNestedInput
+    chapters?: ChapterUpdateManyWithoutCourseNestedInput
   }
 
   export type CourseUncheckedUpdateWithoutAttachmentsInput = {
@@ -5548,6 +10078,316 @@ export namespace Prisma {
     categoryId?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    chapters?: ChapterUncheckedUpdateManyWithoutCourseNestedInput
+  }
+
+  export type MuxDataCreateWithoutChapterInput = {
+    id?: string
+    assetId: string
+    playbackId?: string | null
+  }
+
+  export type MuxDataUncheckedCreateWithoutChapterInput = {
+    id?: string
+    assetId: string
+    playbackId?: string | null
+  }
+
+  export type MuxDataCreateOrConnectWithoutChapterInput = {
+    where: MuxDataWhereUniqueInput
+    create: XOR<MuxDataCreateWithoutChapterInput, MuxDataUncheckedCreateWithoutChapterInput>
+  }
+
+  export type CourseCreateWithoutChaptersInput = {
+    id?: string
+    userId: string
+    title: string
+    description?: string | null
+    imageUrl?: string | null
+    isPublished?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    category?: CategoryCreateNestedOneWithoutCoursesInput
+    attachments?: AttachmentCreateNestedManyWithoutCourseInput
+  }
+
+  export type CourseUncheckedCreateWithoutChaptersInput = {
+    id?: string
+    userId: string
+    title: string
+    description?: string | null
+    imageUrl?: string | null
+    isPublished?: boolean
+    categoryId?: string | null
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    attachments?: AttachmentUncheckedCreateNestedManyWithoutCourseInput
+  }
+
+  export type CourseCreateOrConnectWithoutChaptersInput = {
+    where: CourseWhereUniqueInput
+    create: XOR<CourseCreateWithoutChaptersInput, CourseUncheckedCreateWithoutChaptersInput>
+  }
+
+  export type UserProgressCreateWithoutChapterInput = {
+    id?: string
+    userId: string
+    isComplete?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type UserProgressUncheckedCreateWithoutChapterInput = {
+    id?: string
+    userId: string
+    isComplete?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type UserProgressCreateOrConnectWithoutChapterInput = {
+    where: UserProgressWhereUniqueInput
+    create: XOR<UserProgressCreateWithoutChapterInput, UserProgressUncheckedCreateWithoutChapterInput>
+  }
+
+  export type UserProgressCreateManyChapterInputEnvelope = {
+    data: UserProgressCreateManyChapterInput | UserProgressCreateManyChapterInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type MuxDataUpsertWithoutChapterInput = {
+    update: XOR<MuxDataUpdateWithoutChapterInput, MuxDataUncheckedUpdateWithoutChapterInput>
+    create: XOR<MuxDataCreateWithoutChapterInput, MuxDataUncheckedCreateWithoutChapterInput>
+    where?: MuxDataWhereInput
+  }
+
+  export type MuxDataUpdateToOneWithWhereWithoutChapterInput = {
+    where?: MuxDataWhereInput
+    data: XOR<MuxDataUpdateWithoutChapterInput, MuxDataUncheckedUpdateWithoutChapterInput>
+  }
+
+  export type MuxDataUpdateWithoutChapterInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    assetId?: StringFieldUpdateOperationsInput | string
+    playbackId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type MuxDataUncheckedUpdateWithoutChapterInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    assetId?: StringFieldUpdateOperationsInput | string
+    playbackId?: NullableStringFieldUpdateOperationsInput | string | null
+  }
+
+  export type CourseUpsertWithoutChaptersInput = {
+    update: XOR<CourseUpdateWithoutChaptersInput, CourseUncheckedUpdateWithoutChaptersInput>
+    create: XOR<CourseCreateWithoutChaptersInput, CourseUncheckedCreateWithoutChaptersInput>
+    where?: CourseWhereInput
+  }
+
+  export type CourseUpdateToOneWithWhereWithoutChaptersInput = {
+    where?: CourseWhereInput
+    data: XOR<CourseUpdateWithoutChaptersInput, CourseUncheckedUpdateWithoutChaptersInput>
+  }
+
+  export type CourseUpdateWithoutChaptersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    isPublished?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    category?: CategoryUpdateOneWithoutCoursesNestedInput
+    attachments?: AttachmentUpdateManyWithoutCourseNestedInput
+  }
+
+  export type CourseUncheckedUpdateWithoutChaptersInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    isPublished?: BoolFieldUpdateOperationsInput | boolean
+    categoryId?: NullableStringFieldUpdateOperationsInput | string | null
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    attachments?: AttachmentUncheckedUpdateManyWithoutCourseNestedInput
+  }
+
+  export type UserProgressUpsertWithWhereUniqueWithoutChapterInput = {
+    where: UserProgressWhereUniqueInput
+    update: XOR<UserProgressUpdateWithoutChapterInput, UserProgressUncheckedUpdateWithoutChapterInput>
+    create: XOR<UserProgressCreateWithoutChapterInput, UserProgressUncheckedCreateWithoutChapterInput>
+  }
+
+  export type UserProgressUpdateWithWhereUniqueWithoutChapterInput = {
+    where: UserProgressWhereUniqueInput
+    data: XOR<UserProgressUpdateWithoutChapterInput, UserProgressUncheckedUpdateWithoutChapterInput>
+  }
+
+  export type UserProgressUpdateManyWithWhereWithoutChapterInput = {
+    where: UserProgressScalarWhereInput
+    data: XOR<UserProgressUpdateManyMutationInput, UserProgressUncheckedUpdateManyWithoutChapterInput>
+  }
+
+  export type UserProgressScalarWhereInput = {
+    AND?: UserProgressScalarWhereInput | UserProgressScalarWhereInput[]
+    OR?: UserProgressScalarWhereInput[]
+    NOT?: UserProgressScalarWhereInput | UserProgressScalarWhereInput[]
+    id?: StringFilter<"UserProgress"> | string
+    userId?: StringFilter<"UserProgress"> | string
+    chapterId?: StringFilter<"UserProgress"> | string
+    isComplete?: BoolFilter<"UserProgress"> | boolean
+    createdAt?: DateTimeFilter<"UserProgress"> | Date | string
+    updatedAt?: DateTimeFilter<"UserProgress"> | Date | string
+  }
+
+  export type ChapterCreateWithoutMuxDataInput = {
+    id?: string
+    title: string
+    description?: string | null
+    videoUrl?: string | null
+    position: number
+    isPublished?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    course: CourseCreateNestedOneWithoutChaptersInput
+    userProgress?: UserProgressCreateNestedManyWithoutChapterInput
+  }
+
+  export type ChapterUncheckedCreateWithoutMuxDataInput = {
+    id?: string
+    title: string
+    description?: string | null
+    videoUrl?: string | null
+    position: number
+    isPublished?: boolean
+    courseId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    userProgress?: UserProgressUncheckedCreateNestedManyWithoutChapterInput
+  }
+
+  export type ChapterCreateOrConnectWithoutMuxDataInput = {
+    where: ChapterWhereUniqueInput
+    create: XOR<ChapterCreateWithoutMuxDataInput, ChapterUncheckedCreateWithoutMuxDataInput>
+  }
+
+  export type ChapterUpsertWithoutMuxDataInput = {
+    update: XOR<ChapterUpdateWithoutMuxDataInput, ChapterUncheckedUpdateWithoutMuxDataInput>
+    create: XOR<ChapterCreateWithoutMuxDataInput, ChapterUncheckedCreateWithoutMuxDataInput>
+    where?: ChapterWhereInput
+  }
+
+  export type ChapterUpdateToOneWithWhereWithoutMuxDataInput = {
+    where?: ChapterWhereInput
+    data: XOR<ChapterUpdateWithoutMuxDataInput, ChapterUncheckedUpdateWithoutMuxDataInput>
+  }
+
+  export type ChapterUpdateWithoutMuxDataInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    videoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    position?: IntFieldUpdateOperationsInput | number
+    isPublished?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    course?: CourseUpdateOneRequiredWithoutChaptersNestedInput
+    userProgress?: UserProgressUpdateManyWithoutChapterNestedInput
+  }
+
+  export type ChapterUncheckedUpdateWithoutMuxDataInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    videoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    position?: IntFieldUpdateOperationsInput | number
+    isPublished?: BoolFieldUpdateOperationsInput | boolean
+    courseId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userProgress?: UserProgressUncheckedUpdateManyWithoutChapterNestedInput
+  }
+
+  export type ChapterCreateWithoutUserProgressInput = {
+    id?: string
+    title: string
+    description?: string | null
+    videoUrl?: string | null
+    position: number
+    isPublished?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    muxData?: MuxDataCreateNestedOneWithoutChapterInput
+    course: CourseCreateNestedOneWithoutChaptersInput
+  }
+
+  export type ChapterUncheckedCreateWithoutUserProgressInput = {
+    id?: string
+    title: string
+    description?: string | null
+    videoUrl?: string | null
+    position: number
+    isPublished?: boolean
+    courseId: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    muxData?: MuxDataUncheckedCreateNestedOneWithoutChapterInput
+  }
+
+  export type ChapterCreateOrConnectWithoutUserProgressInput = {
+    where: ChapterWhereUniqueInput
+    create: XOR<ChapterCreateWithoutUserProgressInput, ChapterUncheckedCreateWithoutUserProgressInput>
+  }
+
+  export type ChapterUpsertWithoutUserProgressInput = {
+    update: XOR<ChapterUpdateWithoutUserProgressInput, ChapterUncheckedUpdateWithoutUserProgressInput>
+    create: XOR<ChapterCreateWithoutUserProgressInput, ChapterUncheckedCreateWithoutUserProgressInput>
+    where?: ChapterWhereInput
+  }
+
+  export type ChapterUpdateToOneWithWhereWithoutUserProgressInput = {
+    where?: ChapterWhereInput
+    data: XOR<ChapterUpdateWithoutUserProgressInput, ChapterUncheckedUpdateWithoutUserProgressInput>
+  }
+
+  export type ChapterUpdateWithoutUserProgressInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    videoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    position?: IntFieldUpdateOperationsInput | number
+    isPublished?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    muxData?: MuxDataUpdateOneWithoutChapterNestedInput
+    course?: CourseUpdateOneRequiredWithoutChaptersNestedInput
+  }
+
+  export type ChapterUncheckedUpdateWithoutUserProgressInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    videoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    position?: IntFieldUpdateOperationsInput | number
+    isPublished?: BoolFieldUpdateOperationsInput | boolean
+    courseId?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    muxData?: MuxDataUncheckedUpdateOneWithoutChapterNestedInput
+  }
+
+  export type ChapterCreateManyCourseInput = {
+    id?: string
+    title: string
+    description?: string | null
+    videoUrl?: string | null
+    position: number
+    isPublished?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
   export type AttachmentCreateManyCourseInput = {
@@ -5556,6 +10396,43 @@ export namespace Prisma {
     url: string
     createdAt?: Date | string
     updatedAt?: Date | string
+  }
+
+  export type ChapterUpdateWithoutCourseInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    videoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    position?: IntFieldUpdateOperationsInput | number
+    isPublished?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    muxData?: MuxDataUpdateOneWithoutChapterNestedInput
+    userProgress?: UserProgressUpdateManyWithoutChapterNestedInput
+  }
+
+  export type ChapterUncheckedUpdateWithoutCourseInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    videoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    position?: IntFieldUpdateOperationsInput | number
+    isPublished?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    muxData?: MuxDataUncheckedUpdateOneWithoutChapterNestedInput
+    userProgress?: UserProgressUncheckedUpdateManyWithoutChapterNestedInput
+  }
+
+  export type ChapterUncheckedUpdateManyWithoutCourseInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    videoUrl?: NullableStringFieldUpdateOperationsInput | string | null
+    position?: IntFieldUpdateOperationsInput | number
+    isPublished?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type AttachmentUpdateWithoutCourseInput = {
@@ -5602,6 +10479,7 @@ export namespace Prisma {
     isPublished?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    chapters?: ChapterUpdateManyWithoutCourseNestedInput
     attachments?: AttachmentUpdateManyWithoutCourseNestedInput
   }
 
@@ -5614,6 +10492,7 @@ export namespace Prisma {
     isPublished?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    chapters?: ChapterUncheckedUpdateManyWithoutCourseNestedInput
     attachments?: AttachmentUncheckedUpdateManyWithoutCourseNestedInput
   }
 
@@ -5624,6 +10503,38 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     imageUrl?: NullableStringFieldUpdateOperationsInput | string | null
     isPublished?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserProgressCreateManyChapterInput = {
+    id?: string
+    userId: string
+    isComplete?: boolean
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type UserProgressUpdateWithoutChapterInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    isComplete?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserProgressUncheckedUpdateWithoutChapterInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    isComplete?: BoolFieldUpdateOperationsInput | boolean
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserProgressUncheckedUpdateManyWithoutChapterInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    userId?: StringFieldUpdateOperationsInput | string
+    isComplete?: BoolFieldUpdateOperationsInput | boolean
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
