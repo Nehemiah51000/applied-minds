@@ -21,6 +21,8 @@
     "@clerk/nextjs": "^6.37.4",
     "@hello-pangea/dnd": "^18.0.1",
     "@hookform/resolvers": "^5.2.2",
+    "@mux/mux-node": "^12.8.1",
+    "@mux/mux-player-react": "^3.11.5",
     "@prisma/adapter-pg": "^7.4.0",
     "@prisma/client": "^7.4.0",
     "@prisma/client-runtime-utils": "^7.4.0",

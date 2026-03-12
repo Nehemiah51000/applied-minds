@@ -4,10 +4,11 @@ import { redirect } from 'next/navigation';
 import Link from 'next/link';
 
 import ChapterTitleForm from './_components/ChapterTitleForm';
-
-import { ArrowLeft, LayoutDashboard } from 'lucide-react';
-import IconBadge from '@/components/IconBadge';
 import ChapterDescriptionForm from './_components/ChapterDescriptionForm';
+
+import ChapterVideoForm from './_components/ChapterVideoForm';
+import { ArrowLeft, LayoutDashboard, Video } from 'lucide-react';
+import IconBadge from '@/components/IconBadge';
 
 async function ChapterIdPage({
   params,
@@ -53,7 +54,7 @@ async function ChapterIdPage({
 
           <div className='flex items-center justify-between w-full'>
             <div className='flex flex-col gap-y-2'>
-              <h1 className='text-2xfont-medium'>Chapter Creation</h1>
+              <h1 className='text-2x font-medium'>Chapter Creation</h1>
               <span className='text-sm text-slate-700'>
                 Complete all fields {completionText}
               </span>
@@ -62,7 +63,7 @@ async function ChapterIdPage({
         </div>
       </div>
 
-      <div className='grid grid-col-1 md:grid-col-2 gap-6 mt-16'>
+      <div className='grid grid-cols-1 md:grid-cols-2 gap-6 mt-16'>
         <div className='space-y-4'>
           <div>
             <div className='flex items-center gap-x-2'>
@@ -81,6 +82,17 @@ async function ChapterIdPage({
               courseId={courseId}
             />
           </div>
+        </div>
+        <div>
+          <div className='flex items-center gap-x-2'>
+            <IconBadge icon={Video} />
+            <h2 className='text-xl'>Add Video</h2>
+          </div>
+          <ChapterVideoForm
+            initialData={chapter}
+            chapterId={chapterId}
+            courseId={courseId}
+          />
         </div>
       </div>
     </div>

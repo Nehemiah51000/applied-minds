@@ -5,10 +5,13 @@ import { ImageUp } from 'lucide-react';
 import toast from 'react-hot-toast';
 
 type UploadEndpoint = 'courseImage' | 'courseAttachment' | 'chapterVideo';
+type Media = 'video' | 'picture';
 
 interface IFileUpload {
   onChange: (url?: string) => void;
   endpoint: UploadEndpoint;
+  maxSize: number;
+  media: Media;
 }
 
 const endpointFolderMap: Record<UploadEndpoint, string> = {
@@ -17,7 +20,7 @@ const endpointFolderMap: Record<UploadEndpoint, string> = {
   chapterVideo: 'chapterVideo',
 };
 
-function FileUpload({ onChange, endpoint }: IFileUpload) {
+function FileUpload({ onChange, endpoint, maxSize, media }: IFileUpload) {
   const [isUploading, setIsUploading] = useState(false);
   const inputRef = useRef<HTMLInputElement | null>(null);
 
@@ -28,9 +31,9 @@ function FileUpload({ onChange, endpoint }: IFileUpload) {
     if (!file) return;
 
     // Simple client-side max size check: ~5MB
-    const maxSizeBytes = 5 * 1024 * 1024;
+    const maxSizeBytes = maxSize * 1024 * 1024;
     if (file.size > maxSizeBytes) {
-      toast.error('File is too large. Max size is 5MB.');
+      toast.error(`File is too large. Max size is ${maxSize}MB.`);
       return;
     }
 
@@ -70,7 +73,7 @@ function FileUpload({ onChange, endpoint }: IFileUpload) {
       formData.append('folder', folder);
 
       const uploadRes = await fetch(
-        `https://api.cloudinary.com/v1_1/${cloudName}/image/upload`,
+        `https://api.cloudinary.com/v1_1/${cloudName}/video/upload`,
         {
           method: 'POST',
           body: formData,
@@ -108,20 +111,20 @@ function FileUpload({ onChange, endpoint }: IFileUpload) {
       <div
         role='button'
         onClick={openFileDialog}
-        className='flex w-full flex-col items-center justify-center rounded-md border border-dashed border-muted-foreground/40 bg-muted/40 px-4 py-8 text-center transition hover:border-primary/60 hover:bg-muted/70'
-      >
+        className='flex w-full flex-col items-center justify-center rounded-md border border-dashed border-muted-foreground/40 bg-muted/40 px-4 py-8 text-center transition hover:border-primary/60 hover:bg-muted/70'>
         <ImageUp className='mb-3 h-8 w-8 text-primary' />
         <p className='text-sm font-medium'>
-          {isUploading ? 'Uploading image…' : 'Click to upload image'}
+          {isUploading ? `Uploading ${media}…` : `Click to upload ${media}`}
         </p>
         <p className='mt-1 text-xs text-muted-foreground'>
-          PNG, JPG, or JPEG up to 5MB
+          {media === 'picture' && ` PNG, JPG, or JPEG up to ${maxSize}MB`}
+          {media === 'video' && ` MP4, MKV, or MPEG up to ${maxSize}MB`}
         </p>
       </div>
       <input
         ref={inputRef}
         type='file'
-        accept='image/*'
+        accept={`${media}/*`}
         onChange={handleFileChange}
         disabled={isUploading}
         className='hidden'
