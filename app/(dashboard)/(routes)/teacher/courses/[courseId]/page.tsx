@@ -63,6 +63,7 @@ async function CourseIdPage({
   const completedFields = requiredFields.filter(Boolean).length;
 
   const completionText = `${completedFields}/${totalFields}`;
+
   return (
     <div className='p-6'>
       <div className='flex items-center justify-between'>
