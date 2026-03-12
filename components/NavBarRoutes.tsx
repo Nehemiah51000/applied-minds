@@ -2,7 +2,7 @@
 
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
-import { UserButton } from '@clerk/nextjs';
+import { ClerkLoaded, UserButton } from '@clerk/nextjs';
 import { LogOut } from 'lucide-react';
 
 import { Button } from './ui/button';
@@ -29,7 +29,9 @@ function NavBarRoutes() {
           </Button>
         </Link>
       )}
-      <UserButton afterSignOutUrl='/' />
+      <ClerkLoaded>
+        {typeof window !== 'undefined' && <UserButton afterSignOutUrl='/' />}
+      </ClerkLoaded>
     </div>
   );
 }
