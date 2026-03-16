@@ -60,6 +60,7 @@ function ChapterActions({
         );
         toast.success('Chapter published successfully');
       }
+      router.refresh();
     } catch {
       toast.error('Failed to publish chapter. Please try again.');
     } finally {
