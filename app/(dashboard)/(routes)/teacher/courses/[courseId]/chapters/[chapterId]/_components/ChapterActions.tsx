@@ -26,6 +26,8 @@ function ChapterActions({
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
 
+  console.log(disabled);
+
   async function handleDelete() {
     try {
       setIsLoading(true);
@@ -42,12 +44,34 @@ function ChapterActions({
       setIsLoading(false);
     }
   }
+
+  async function handlePublish() {
+    try {
+      setIsLoading(true);
+
+      if (isPublished) {
+        await axios.patch(
+          `/api/courses/${courseId}/chapters/${chapterId}/unpublish`,
+        );
+        toast.success('Chapter unpublished successfully');
+      } else {
+        await axios.patch(
+          `/api/courses/${courseId}/chapters/${chapterId}/publish`,
+        );
+        toast.success('Chapter published successfully');
+      }
+    } catch {
+      toast.error('Failed to publish chapter. Please try again.');
+    } finally {
+      setIsLoading(false);
+    }
+  }
   return (
     <div className='flex items-center gap-x-2'>
       <Button
         disabled={disabled || isLoading}
         size='sm'
-        onClick={() => {}}
+        onClick={handlePublish}
         variant='outline'>
         {!isPublished ? 'Publish' : 'Unpublish'}
       </Button>
