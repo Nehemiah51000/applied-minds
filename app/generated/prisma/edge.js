@@ -39,12 +39,12 @@ exports.Prisma = Prisma
 exports.$Enums = {}
 
 /**
- * Prisma Client JS version: 7.4.2
- * Query Engine version: 94a226be1cf2967af2541cca5529f0f7ba866919
+ * Prisma Client JS version: 7.5.0
+ * Query Engine version: 280c870be64f457428992c43c1f6d557fab6e29e
  */
 Prisma.prismaVersion = {
-  client: "7.4.2",
-  engine: "94a226be1cf2967af2541cca5529f0f7ba866919"
+  client: "7.5.0",
+  engine: "280c870be64f457428992c43c1f6d557fab6e29e"
 }
 
 Prisma.PrismaClientKnownRequestError = PrismaClientKnownRequestError;
@@ -175,8 +175,8 @@ exports.Prisma.ModelName = {
  */
 const config = {
   "previewFeatures": [],
-  "clientVersion": "7.4.2",
-  "engineVersion": "94a226be1cf2967af2541cca5529f0f7ba866919",
+  "clientVersion": "7.5.0",
+  "engineVersion": "280c870be64f457428992c43c1f6d557fab6e29e",
   "activeProvider": "postgresql",
   "inlineSchema": "generator client {\n  provider = \"prisma-client-js\"\n  output   = \"../app/generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n}\n\nmodel Course {\n  id          String    @id @default(uuid())\n  userId      String\n  title       String\n  description String?   @db.Text\n  imageUrl    String?\n  // price      Float?\n  isPublished Boolean   @default(false)\n  category    Category? @relation(fields: [categoryId], references: [id])\n\n  categoryId String?\n  chapters   Chapter[]\n\n  attachments Attachment[]\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n}\n\nmodel Category {\n  id      String   @id @default(uuid())\n  name    String   @unique\n  courses Course[]\n}\n\nmodel Attachment {\n  id   String @id @default(uuid())\n  name String\n  url  String\n\n  courseId String\n  course   Course @relation(fields: [courseId], references: [id], onDelete: Cascade)\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n}\n\nmodel Chapter {\n  id          String  @id @default(uuid())\n  title       String\n  description String? @db.Text\n  videoUrl    String? @db.Text\n  position    Int\n  isPublished Boolean @default(false)\n\n  muxData  MuxData?\n  courseId String\n  course   Course   @relation(fields: [courseId], references: [id], onDelete: Cascade)\n\n  userProgress UserProgress[]\n  createdAt    DateTime       @default(now())\n  updatedAt    DateTime       @updatedAt\n}\n\nmodel MuxData {\n  id         String  @id @default(uuid())\n  assetId    String\n  playbackId String?\n\n  chapterId String  @unique\n  chapter   Chapter @relation(fields: [chapterId], references: [id], onDelete: Cascade)\n}\n\nmodel UserProgress {\n  id        String  @id @default(uuid())\n  userId    String\n  chapterId String\n  chapter   Chapter @relation(fields: [chapterId], references: [id], onDelete: Cascade)\n\n  isComplete Boolean @default(false)\n\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  @@unique([userId, chapterId])\n}\n"
 }

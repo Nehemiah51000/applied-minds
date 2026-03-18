@@ -274,8 +274,8 @@ export namespace Prisma {
   export import Exact = $Public.Exact
 
   /**
-   * Prisma Client JS version: 7.4.2
-   * Query Engine version: 94a226be1cf2967af2541cca5529f0f7ba866919
+   * Prisma Client JS version: 7.5.0
+   * Query Engine version: 280c870be64f457428992c43c1f6d557fab6e29e
    */
   export type PrismaVersion = {
     client: string
@@ -2324,6 +2324,11 @@ export namespace Prisma {
      * Skip the first `n` Courses.
      */
     skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Courses.
+     */
     distinct?: CourseScalarFieldEnum | CourseScalarFieldEnum[]
   }
 
@@ -3406,6 +3411,11 @@ export namespace Prisma {
      * Skip the first `n` Categories.
      */
     skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Categories.
+     */
     distinct?: CategoryScalarFieldEnum | CategoryScalarFieldEnum[]
   }
 
@@ -4493,6 +4503,11 @@ export namespace Prisma {
      * Skip the first `n` Attachments.
      */
     skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Attachments.
+     */
     distinct?: AttachmentScalarFieldEnum | AttachmentScalarFieldEnum[]
   }
 
@@ -5647,6 +5662,11 @@ export namespace Prisma {
      * Skip the first `n` Chapters.
      */
     skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of Chapters.
+     */
     distinct?: ChapterScalarFieldEnum | ChapterScalarFieldEnum[]
   }
 
@@ -6735,6 +6755,11 @@ export namespace Prisma {
      * Skip the first `n` MuxData.
      */
     skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of MuxData.
+     */
     distinct?: MuxDataScalarFieldEnum | MuxDataScalarFieldEnum[]
   }
 
@@ -7806,6 +7831,11 @@ export namespace Prisma {
      * Skip the first `n` UserProgresses.
      */
     skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of UserProgresses.
+     */
     distinct?: UserProgressScalarFieldEnum | UserProgressScalarFieldEnum[]
   }
 

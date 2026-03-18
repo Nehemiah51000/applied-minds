@@ -9,7 +9,7 @@ import { useState } from 'react';
 import toast from 'react-hot-toast';
 import { cn } from '@/lib/utils';
 
-import { Loader2, Pencil, PlusCircle } from 'lucide-react';
+import { Loader2, PlusCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import {
   Form,
