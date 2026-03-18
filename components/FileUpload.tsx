@@ -24,6 +24,8 @@ function FileUpload({ onChange, endpoint, maxSize, media }: IFileUpload) {
   const [isUploading, setIsUploading] = useState(false);
   const inputRef = useRef<HTMLInputElement | null>(null);
 
+  const urlMedia = media === 'picture' ? 'image' : 'video';
+
   const handleFileChange = async (
     event: React.ChangeEvent<HTMLInputElement>,
   ) => {
@@ -73,7 +75,7 @@ function FileUpload({ onChange, endpoint, maxSize, media }: IFileUpload) {
       formData.append('folder', folder);
 
       const uploadRes = await fetch(
-        `https://api.cloudinary.com/v1_1/${cloudName}/video/upload`,
+        `https://api.cloudinary.com/v1_1/${cloudName}/${urlMedia}/upload`,
         {
           method: 'POST',
           body: formData,

@@ -32,8 +32,8 @@ function ImageForm({ initialData, courseId }: IImageFormProps) {
   const router = useRouter();
   const handleSubmit = async (values: z.infer<typeof formSchema>) => {
     try {
+      console.log('I am here', values);
       await axios.patch(`/api/courses/${courseId}`, values);
-      console.log(courseId);
 
       toast.success('Image uploaded successfully');
       toggleEdit();
@@ -87,6 +87,7 @@ function ImageForm({ initialData, courseId }: IImageFormProps) {
             endpoint='courseImage'
             onChange={async (url) => {
               if (url) {
+                console.log(url);
                 await handleSubmit({ imageUrl: url });
               }
             }}
