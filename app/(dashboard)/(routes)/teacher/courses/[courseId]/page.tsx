@@ -3,7 +3,7 @@ import { db } from '@/lib/db';
 import { auth } from '@clerk/nextjs/server';
 
 import IconBadge from '@/components/IconBadge';
-import { File, LayoutDashboard, ListChecks } from 'lucide-react';
+import { ArrowLeft, File, LayoutDashboard, ListChecks } from 'lucide-react';
 
 import TitleForm from './_components/TitleForm';
 import DescriptionForm from './_components/DescriptionForm';
@@ -13,6 +13,7 @@ import AttachmentsForm from './_components/AttachmentsForm';
 import ChapterForm from './_components/ChapterForm';
 import Banner from '@/components/Banner';
 import Actions from './_components/Actions';
+import Link from 'next/link';
 
 async function CourseIdPage({
   params,
@@ -77,6 +78,12 @@ async function CourseIdPage({
       )}
 
       <div className='p-6'>
+        <Link
+          href={`/teacher/courses`}
+          className='flex items-center hover:opacity-75 transition mb-6'>
+          <ArrowLeft className='h-4 w-4 mr-2' />
+          Back to courses
+        </Link>
         <div className='flex items-center justify-between'>
           <div className='flex flex-col gap-y-2'>
             <h1 className='text-2xl font-medium'>Course Setup</h1>
