@@ -36,7 +36,7 @@ async function SearchPage({ searchParams }: ISearchPageProps) {
       <div className='p-6 md:hidden  md:mb-0 block'>
         <SearchInput />
       </div>
-      <div className='p-6'>
+      <div className='p-6 space-y-4'>
         <Categories items={categories} />
         <CoursesWrapper userId={userId} searchParams={searchParams} />
       </div>
