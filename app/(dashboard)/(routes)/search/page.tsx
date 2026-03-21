@@ -6,11 +6,12 @@ import Categories from './_components/Categories';
 import SearchInput from '@/components/SearchInput';
 import getCourses from '@/actions/getCourses';
 import CoursesList from '@/components/CoursesList';
+import CoursesWrapper from './_components/CoursesWrapper';
 
 interface ISearchPageProps {
   searchParams: {
-    title: string;
-    categoryId: string;
+    title?: string;
+    categoryId?: string;
   };
 }
 
@@ -37,7 +38,7 @@ async function SearchPage({ searchParams }: ISearchPageProps) {
       </div>
       <div className='p-6'>
         <Categories items={categories} />
-        <CoursesList items={courses} />
+        <CoursesWrapper userId={userId} searchParams={searchParams} />
       </div>
     </>
   );

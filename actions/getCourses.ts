@@ -2,7 +2,7 @@ import { Category, Course } from '@/app/generated/prisma';
 import { db } from '@/lib/db';
 import getProgress from './getProgress';
 
-type TCoursesWithProgressWithCategory = Course & {
+export type TCoursesWithProgressWithCategory = Course & {
   category: Category | null;
   chapters: { id: string }[];
   progress: number | null;
@@ -19,14 +19,24 @@ async function getCourses({
   categoryId,
 }: TGetCourses): Promise<TCoursesWithProgressWithCategory[]> {
   try {
+    const cleanTitle = title?.trim();
+
     const courses = await db.course.findMany({
       where: {
         isPublished: true,
-        title: {
-          contains: title,
-        },
-        categoryId,
+
+        ...(cleanTitle && {
+          title: {
+            contains: cleanTitle,
+            mode: 'insensitive',
+          },
+        }),
+
+        ...(categoryId && {
+          categoryId,
+        }),
       },
+
       include: {
         category: true,
         chapters: {
@@ -38,6 +48,7 @@ async function getCourses({
           },
         },
       },
+
       orderBy: {
         createdAt: 'desc',
       },
@@ -56,7 +67,7 @@ async function getCourses({
 
     return courseWithProgress;
   } catch (error) {
-    console.log('[GET_COURSES', error);
+    console.log('[GET_COURSES]', error);
     return [];
   }
 }
