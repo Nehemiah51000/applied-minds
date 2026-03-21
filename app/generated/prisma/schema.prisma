@@ -24,6 +24,8 @@ model Course {
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  @@index([title])
 }
 
 model Category {
