@@ -7,17 +7,18 @@ import CoursesList from '@/components/CoursesList';
 
 interface ICoursesWrapperProps {
   userId: string;
-  searchParams: { title?: string; categoryId?: string };
+  searchParams?: { title?: string; categoryId?: string };
 }
 
 export default async function CoursesWrapper({
   userId,
   searchParams,
 }: ICoursesWrapperProps) {
-  const courses: TCoursesWithProgressWithCategory[] = await getCourses({
+  const searchParamsObject = await searchParams;
+  const courses = await getCourses({
     userId,
-    title: searchParams.title,
-    categoryId: searchParams.categoryId,
+    title: searchParamsObject?.title,
+    categoryId: searchParamsObject?.categoryId,
   });
 
   return <CoursesList items={courses} />;

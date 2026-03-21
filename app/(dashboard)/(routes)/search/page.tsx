@@ -2,10 +2,8 @@ import { db } from '@/lib/db';
 import { auth } from '@clerk/nextjs/server';
 import { redirect } from 'next/navigation';
 
-import Categories from './_components/Categories';
 import SearchInput from '@/components/SearchInput';
-import getCourses from '@/actions/getCourses';
-import CoursesList from '@/components/CoursesList';
+import Categories from './_components/Categories';
 import CoursesWrapper from './_components/CoursesWrapper';
 
 interface ISearchPageProps {
@@ -27,10 +25,7 @@ async function SearchPage({ searchParams }: ISearchPageProps) {
       name: 'asc',
     },
   });
-  const courses = await getCourses({
-    userId,
-    ...searchParams,
-  });
+
   return (
     <>
       <div className='p-6 md:hidden  md:mb-0 block'>
