@@ -1,8 +1,6 @@
 // app/(dashboard)/(routes)/search/_components/CoursesWrapper.tsx
 
-import getCourses, {
-  TCoursesWithProgressWithCategory,
-} from '@/actions/getCourses';
+import getCourses from '@/actions/getCourses';
 import CoursesList from '@/components/CoursesList';
 
 interface ICoursesWrapperProps {
