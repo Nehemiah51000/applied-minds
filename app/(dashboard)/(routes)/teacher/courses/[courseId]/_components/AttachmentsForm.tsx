@@ -35,7 +35,7 @@ function AttachmentsForm({ initialData, courseId }: IAttachmentsFormProps) {
       await axios.delete(`/api/courses/${courseId}/attachments/${id}`);
 
       toast.success('Attachment deleted successfully');
-      toggleEdit();
+      // toggleEdit();
       router.refresh();
     } catch (error) {
       toast.error(
@@ -119,6 +119,8 @@ function AttachmentsForm({ initialData, courseId }: IAttachmentsFormProps) {
                 await handleSubmit({ url: url });
               }
             }}
+            maxSize={8}
+            media={'attachment'}
           />
           <div className='text-sx text-muted-foreground mt-4'>
             Add anything your students might need to complete the course

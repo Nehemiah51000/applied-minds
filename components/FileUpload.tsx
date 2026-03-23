@@ -5,7 +5,7 @@ import { ImageUp } from 'lucide-react';
 import toast from 'react-hot-toast';
 
 type UploadEndpoint = 'courseImage' | 'courseAttachment' | 'chapterVideo';
-type Media = 'video' | 'picture';
+type Media = 'video' | 'picture' | 'attachment';
 
 interface IFileUpload {
   onChange: (url?: string) => void;
@@ -24,7 +24,8 @@ function FileUpload({ onChange, endpoint, maxSize, media }: IFileUpload) {
   const [isUploading, setIsUploading] = useState(false);
   const inputRef = useRef<HTMLInputElement | null>(null);
 
-  const urlMedia = media === 'picture' ? 'image' : 'video';
+  const urlMedia =
+    media === 'picture' ? 'image' : media === 'video' ? 'video' : 'raw';
 
   const handleFileChange = async (
     event: React.ChangeEvent<HTMLInputElement>,
@@ -121,12 +122,19 @@ function FileUpload({ onChange, endpoint, maxSize, media }: IFileUpload) {
         <p className='mt-1 text-xs text-muted-foreground'>
           {media === 'picture' && ` PNG, JPG, or JPEG up to ${maxSize}MB`}
           {media === 'video' && ` MP4, MKV, or MPEG up to ${maxSize}MB`}
+          {media === 'attachment' && `Add any file up to ${maxSize}MB`}
         </p>
       </div>
       <input
         ref={inputRef}
         type='file'
-        accept={`${media}/*`}
+        accept={
+          media === 'picture'
+            ? 'image/*'
+            : media === 'video'
+              ? 'video/*'
+              : '*/*'
+        }
         onChange={handleFileChange}
         disabled={isUploading}
         className='hidden'
