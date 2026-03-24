@@ -1,12 +1,14 @@
 import { getChapter } from '@/actions/getChapter';
-import Banner from '@/components/Banner';
 import { auth } from '@clerk/nextjs/server';
 import { redirect } from 'next/navigation';
 
 import { File } from 'lucide-react';
+
+import Banner from '@/components/Banner';
 import { Preview } from '@/components/Preview';
 import { Separator } from '@/components/ui/separator';
-import VideoPlayer from '../../_components/VideoPlayer';
+import VideoPlayer from './_components/VideoPlayer';
+import CourseProgressButton from './_components/CourseProgressButton';
 
 async function ChapterIdPage({
   params,
@@ -52,8 +54,12 @@ async function ChapterIdPage({
           <div className='p-4 flex flex-col md:flex-row items-center'>
             <h2 className='text-2xl font-semibold mb-2 '>{chapter.title}</h2>
 
-            {/*//@TODO:: WHEN YOU ADD PURCHASING OF COURSE ADD AN ENROLL BUTTON*/}
-            {/*@TODO: add CourseProgressButton*/}
+            <CourseProgressButton
+              chapterId={chapterId}
+              courseId={courseId}
+              nextChapterId={nextChapter?.id}
+              isComplete={!!userProgress?.isComplete}
+            />
           </div>
         </div>
 
