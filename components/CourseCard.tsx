@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { BookOpen } from 'lucide-react';
 
 import IconBadge from './IconBadge';
+import CourseProgress from './CourseProgress';
 
 interface ICourseCardProps {
   id: string;
@@ -45,9 +46,15 @@ function CourseCard({
               </span>
             </div>
           </div>
-          {progress !== null && <div>{/*//@todo add progress component*/}</div>}
+          {progress !== null && (
+            <CourseProgress
+              variant={progress === 100 ? 'success' : 'default'}
+              value={progress}
+              size='sm'
+            />
+          )}
         </div>
-        <p>Progress: {progress !== null ? `${progress}%` : 'Not started'}</p>
+        {/* <p>Progress: {progress !== null ? `${progress}%` : 'Not started'}</p> */}
       </div>
     </Link>
   );
