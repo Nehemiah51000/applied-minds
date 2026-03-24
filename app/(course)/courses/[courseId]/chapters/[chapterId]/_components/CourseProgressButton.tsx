@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 import toast from 'react-hot-toast';
 import { useConfettiStore } from '@/hooks/useConfettiStore';
 
-import { CheckCircle, XCircle } from 'lucide-react';
+import { CheckCircle, Loader2, XCircle } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
 
@@ -43,8 +43,13 @@ function CourseProgressButton({
         confetti.onOpen();
       }
       if (!isComplete && nextChapterId) {
-        router.push(`/api/courses/${courseId}/chapters/${nextChapterId}`);
+        router.push(`/courses/${courseId}/chapters/${nextChapterId}`);
       }
+
+      toast.success(
+        `Chapter marked as ${isComplete ? 'completed' : 'uncompleted'}`,
+      );
+      router.refresh();
     } catch {
       toast.error('Something went wrong');
     } finally {
@@ -55,8 +60,11 @@ function CourseProgressButton({
     <Button
       type='button'
       variant={isComplete ? 'outline' : 'success'}
-      className='w-full md:w-auto'>
-      {isComplete ? 'Not completed' : 'Mark as complete'}
+      disabled={isLoading}
+      className='w-full md:w-auto'
+      onClick={handleClick}>
+      {!isLoading && isComplete ? 'Mark as uncompleted' : 'Mark as complete'}
+
       <Icon className='h-4 w-4 ml-2' />
     </Button>
   );
