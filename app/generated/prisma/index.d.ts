@@ -55,9 +55,7 @@ export type Enrollment = $Result.DefaultSelection<Prisma.$EnrollmentPayload>
  * Type-safe database client for TypeScript & Node.js
  * @example
  * ```
- * const prisma = new PrismaClient({
- *   adapter: new PrismaPg({ connectionString: process.env.DATABASE_URL })
- * })
+ * const prisma = new PrismaClient()
  * // Fetch zero or more Courses
  * const courses = await prisma.course.findMany()
  * ```
@@ -78,9 +76,7 @@ export class PrismaClient<
    * Type-safe database client for TypeScript & Node.js
    * @example
    * ```
-   * const prisma = new PrismaClient({
-   *   adapter: new PrismaPg({ connectionString: process.env.DATABASE_URL })
-   * })
+   * const prisma = new PrismaClient()
    * // Fetch zero or more Courses
    * const courses = await prisma.course.findMany()
    * ```
@@ -160,7 +156,7 @@ export class PrismaClient<
    * ])
    * ```
    * 
-   * Read more in our [docs](https://www.prisma.io/docs/orm/prisma-client/queries/transactions).
+   * Read more in our [docs](https://www.prisma.io/docs/concepts/components/prisma-client/transactions).
    */
   $transaction<P extends Prisma.PrismaPromise<any>[]>(arg: [...P], options?: { isolationLevel?: Prisma.TransactionIsolationLevel }): $Utils.JsPromise<runtime.Types.Utils.UnwrapTuple<P>>
 
@@ -289,8 +285,8 @@ export namespace Prisma {
   export import Exact = $Public.Exact
 
   /**
-   * Prisma Client JS version: 7.5.0
-   * Query Engine version: 280c870be64f457428992c43c1f6d557fab6e29e
+   * Prisma Client JS version: 7.4.0
+   * Query Engine version: ab56fe763f921d033a6c195e7ddeb3e255bdbb57
    */
   export type PrismaVersion = {
     client: string
@@ -2428,11 +2424,6 @@ export namespace Prisma {
      * Skip the first `n` Courses.
      */
     skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of Courses.
-     */
     distinct?: CourseScalarFieldEnum | CourseScalarFieldEnum[]
   }
 
@@ -3539,11 +3530,6 @@ export namespace Prisma {
      * Skip the first `n` Categories.
      */
     skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of Categories.
-     */
     distinct?: CategoryScalarFieldEnum | CategoryScalarFieldEnum[]
   }
 
@@ -4631,11 +4617,6 @@ export namespace Prisma {
      * Skip the first `n` Attachments.
      */
     skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of Attachments.
-     */
     distinct?: AttachmentScalarFieldEnum | AttachmentScalarFieldEnum[]
   }
 
@@ -5790,11 +5771,6 @@ export namespace Prisma {
      * Skip the first `n` Chapters.
      */
     skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of Chapters.
-     */
     distinct?: ChapterScalarFieldEnum | ChapterScalarFieldEnum[]
   }
 
@@ -6883,11 +6859,6 @@ export namespace Prisma {
      * Skip the first `n` MuxData.
      */
     skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of MuxData.
-     */
     distinct?: MuxDataScalarFieldEnum | MuxDataScalarFieldEnum[]
   }
 
@@ -7959,11 +7930,6 @@ export namespace Prisma {
      * Skip the first `n` UserProgresses.
      */
     skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of UserProgresses.
-     */
     distinct?: UserProgressScalarFieldEnum | UserProgressScalarFieldEnum[]
   }
 
@@ -9009,11 +8975,6 @@ export namespace Prisma {
      * Skip the first `n` Enrollments.
      */
     skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of Enrollments.
-     */
     distinct?: EnrollmentScalarFieldEnum | EnrollmentScalarFieldEnum[]
   }
 

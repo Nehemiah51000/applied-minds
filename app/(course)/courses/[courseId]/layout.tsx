@@ -6,13 +6,15 @@ import { ReactNode } from 'react';
 import CourseSidebar from './_components/CourseSidebar';
 import CourseNavbar from './_components/CourseNavbar';
 
+interface CourseIdPageLayoutProps {
+  children: ReactNode;
+  params: Promise<{ courseId: string }>;
+}
+
 async function CourseIdPageLayout({
   children,
   params,
-}: {
-  children: ReactNode;
-  params: Promise<{ courseId: string }>;
-}) {
+}: CourseIdPageLayoutProps) {
   const { userId } = await auth();
   const { courseId } = await params;
 
@@ -42,6 +44,7 @@ async function CourseIdPageLayout({
       },
     },
   });
+
   if (!course) {
     return redirect('/');
   }
@@ -60,4 +63,5 @@ async function CourseIdPageLayout({
     </div>
   );
 }
+
 export default CourseIdPageLayout;
