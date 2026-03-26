@@ -1,9 +1,22 @@
 import { NextResponse } from 'next/server';
 import { cloudinary } from '@/lib/cloudinary';
+import { auth } from '@clerk/nextjs/server';
+import { isTeacher } from '@/lib/teacher';
 
-// Signed upload signature generator for Cloudinary
 export async function POST(req: Request) {
-  const { folder } = await req.json();
+  const { userId } = await auth();
+
+  if (!userId || !isTeacher(userId)) {
+    return new NextResponse('Unauthorized', { status: 401 });
+  }
+
+  let body: { folder?: string } = {};
+
+  try {
+    body = await req.json();
+  } catch {
+    return new NextResponse('Invalid request body', { status: 400 });
+  }
 
   const timestamp = Math.round(Date.now() / 1000);
 
@@ -11,21 +24,28 @@ export async function POST(req: Request) {
     timestamp,
   };
 
-  if (folder && typeof folder === 'string') {
-    paramsToSign.folder = folder;
+  if (body.folder && typeof body.folder === 'string') {
+    const sanitizedFolder = body.folder.replace(/[^a-zA-Z0-9/_-]/g, '');
+    if (sanitizedFolder.length > 0) {
+      paramsToSign.folder = sanitizedFolder;
+    }
   }
 
-  const signature = cloudinary.utils.api_sign_request(
-    paramsToSign,
-    process.env.CLOUDINARY_API_SECRET as string,
-  );
+  const apiSecret = process.env.CLOUDINARY_API_SECRET;
+  const cloudName = process.env.CLOUDINARY_CLOUD_NAME;
+  const apiKey = process.env.CLOUDINARY_API_KEY;
+
+  if (!apiSecret || !cloudName || !apiKey) {
+    return new NextResponse('Server configuration error', { status: 500 });
+  }
+
+  const signature = cloudinary.utils.api_sign_request(paramsToSign, apiSecret);
 
   return NextResponse.json({
     timestamp,
     signature,
-    folder: folder ?? undefined,
-    cloudName: process.env.CLOUDINARY_CLOUD_NAME,
-    apiKey: process.env.CLOUDINARY_API_KEY,
+    folder: paramsToSign.folder ?? undefined,
+    cloudName,
+    apiKey,
   });
 }
-
