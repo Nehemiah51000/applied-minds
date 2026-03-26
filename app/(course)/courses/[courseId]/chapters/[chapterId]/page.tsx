@@ -15,7 +15,7 @@ import { db } from '@/lib/db';
 async function ChapterIdPage({
   params,
 }: {
-  params: { chapterId: string; courseId: string };
+  params: Promise<{ chapterId: string; courseId: string }>;
 }) {
   const { chapterId, courseId } = await params;
   const { userId } = await auth();
