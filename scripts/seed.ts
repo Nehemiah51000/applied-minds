@@ -1,11 +1,8 @@
 import 'dotenv/config';
 import { db } from '@/lib/db.js';
 
-// We'll use the types directly from the generated client
-
 const userId = `${process.env.NEXT_PUBLIC_TEACHER_ID}`;
 
-// Mapping categories to their specific Cloudinary images
 const categoryImageMap: { [key: string]: string } = {
   'Computer Science':
     'https://res.cloudinary.com/dau0znlmo/image/upload/v1774506383/courseImage/qpx9dzekqn4akxnmty6h.jpg',
@@ -28,15 +25,14 @@ const fallbackImage =
 
 const attachmentLinks = [
   'https://res.cloudinary.com/dau0znlmo/raw/upload/v1774507136/courseAttachment/rku4kbbv7ya1klklrdpy.png',
-  'https://res.cloudinary.com/dau0znlmo/raw/upload/v1774507105/courseAttachment/c3gap8mwrcny0nzbyydj.png',
+  'https://res.cloudinary.com/dau0znlmo/raw/upload/v1774507005/courseAttachment/c3gap8mwrcny0nzbyydj.png',
 ];
 
 async function main() {
-  console.log('Seeding catabase...');
+  console.log('Seeding database with formatted Tiptap notes...');
 
   const categoryNames = Object.keys(categoryImageMap);
 
-  // Ensure all categories exist
   for (const name of categoryNames) {
     await db.category.upsert({
       where: { name },
@@ -49,8 +45,6 @@ async function main() {
 
   for (let i = 0; i < 10; i++) {
     const category = allCategories[i % allCategories.length];
-
-    // Select image based on category name, or use fallback
     const selectedImage = categoryImageMap[category.name] || fallbackImage;
 
     const course = await db.course.create({
@@ -64,13 +58,32 @@ async function main() {
       },
     });
 
-    const numChapters = 8 + Math.floor(Math.random() * 3); // 8–10 chapters
+    const numChapters = 8 + Math.floor(Math.random() * 3);
 
     for (let j = 0; j < numChapters; j++) {
+      const chapterTitle = `Chapter ${j + 1}`;
+
+      // HTML formatted string for Tiptap editor
+      const chapterDescription = `
+        <h1>${chapterTitle}</h1>
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. This is a demonstration of <strong>Tiptap</strong> styling within your course platform.</p>
+        
+        <h3>Key Learning Objectives</h3>
+        <ul>
+          <li>Understanding the core concepts of ${category.name}</li>
+          <li>Practical application of Chapter ${j + 1} techniques</li>
+          <li>Best practices and industry standards</li>
+        </ul>
+
+        <h3>Resources & Notes</h3>
+        <p>Review the attached files for additional context on this topic. Remember to take your own notes as you follow along with the video.</p>
+        <p><em>Note: This content is auto-generated for testing purposes.</em></p>
+      `;
+
       const chapter = await db.chapter.create({
         data: {
-          title: `Chapter ${j + 1}`,
-          description: `Description for Chapter ${j + 1} of ${course.title}`,
+          title: chapterTitle,
+          description: chapterDescription,
           videoUrl:
             'https://res.cloudinary.com/dau0znlmo/video/upload/v1774507680/chapterVideo/ovtrhzlwwtnnajq2gtk4.mp4',
           position: j + 1,
@@ -79,7 +92,6 @@ async function main() {
         },
       });
 
-      // Mux Data (Hardcoded for seed)
       await db.muxData.create({
         data: {
           chapterId: chapter.id,
@@ -89,11 +101,11 @@ async function main() {
       });
     }
 
-    const numAttachments = 2 + Math.floor(Math.random() * 3); // 2–4 attachments
+    const numAttachments = 2 + Math.floor(Math.random() * 3);
     for (let k = 0; k < numAttachments; k++) {
       await db.attachment.create({
         data: {
-          name: `Attachment ${k + 1}`,
+          name: `Resource ${k + 1}`,
           url: attachmentLinks[k % attachmentLinks.length],
           courseId: course.id,
         },
@@ -101,7 +113,7 @@ async function main() {
     }
   }
 
-  console.log('Database seeded successfully');
+  console.log('Database seeded successfully!');
 }
 
 main()
