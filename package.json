@@ -10,11 +10,12 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "push:db": "pnpm dlx prisma db push",
-    "pull:db": "pnpm dlx prisma db pull",
-    "seed:db": "pnpm dlx prisma db seed",
-    "generate:db": "pnpm dlx prisma generate",
-    "lint": "eslint"
+    "push:db": "pnpm prisma db push",
+    "pull:db": "pnpm prisma db pull",
+    "seed:db": "pnpm prisma db seed",
+    "generate:db": "pnpm prisma generate",
+    "lint": "eslint",
+    "postinstall": "prisma generate"
   },
   "dependencies": {
     "@base-ui/react": "^1.2.0",
