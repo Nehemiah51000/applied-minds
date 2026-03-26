@@ -3,7 +3,7 @@ import { Chapter, Course } from '../app/generated/prisma/client.js';
 import { db } from '@/lib/db.js';
 // import { randomUUID } from 'crypto';
 
-const userId = 'user_39paBBFYwmeF95BSRk3hbwHkQtV';
+const userId = `${process.env.NEXT_PUBLIC_TEACHER_ID}`;
 
 const courseImages = [
   'https://res.cloudinary.com/dau0znlmo/image/upload/v1774506383/courseImage/qpx9dzekqn4akxnmty6h.jpg',

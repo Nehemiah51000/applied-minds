@@ -14,6 +14,7 @@
     "pull:db": "pnpm prisma db pull",
     "seed:db": "pnpm prisma db seed",
     "generate:db": "pnpm prisma generate",
+    "studio:db": "pnpm prisma studio",
     "lint": "eslint",
     "postinstall": "prisma generate"
   },
