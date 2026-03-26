@@ -15,7 +15,6 @@ function SearchInput() {
   const router = useRouter();
 
   const currentCategoryId = searchParams.get('categoryId');
-  console.log(currentCategoryId);
 
   useEffect(() => {
     const url = qs.stringifyUrl(

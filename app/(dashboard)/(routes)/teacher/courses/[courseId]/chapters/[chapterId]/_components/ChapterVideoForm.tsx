@@ -40,7 +40,6 @@ function ChapterVideoForm({
         `/api/courses/${courseId}/chapters/${chapterId}`,
         values,
       );
-      console.log(courseId);
 
       toast.success('Chapter updated successfully');
       toggleEdit();

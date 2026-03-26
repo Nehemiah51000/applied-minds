@@ -26,8 +26,6 @@ function ChapterActions({
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
 
-  console.log(disabled);
-
   async function handleDelete() {
     try {
       setIsLoading(true);

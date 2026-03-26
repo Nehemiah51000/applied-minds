@@ -32,7 +32,7 @@ const attachmentLinks = [
 ];
 
 async function main() {
-  console.log('Seeding categories...');
+  console.log('Seeding catabase...');
 
   const categoryNames = Object.keys(categoryImageMap);
 
@@ -46,8 +46,6 @@ async function main() {
   }
 
   const allCategories = await db.category.findMany();
-
-  console.log('Seeding courses...');
 
   for (let i = 0; i < 10; i++) {
     const category = allCategories[i % allCategories.length];
