@@ -22,8 +22,6 @@ function Actions({ disabled, courseId, isPublished }: IActionsProps) {
   const router = useRouter();
   const confetti = useConfettiStore();
 
-  console.log(disabled);
-
   async function handleDelete() {
     try {
       setIsLoading(true);

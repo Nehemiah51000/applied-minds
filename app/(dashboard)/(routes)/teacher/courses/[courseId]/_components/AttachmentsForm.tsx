@@ -17,6 +17,7 @@ interface IAttachmentsFormProps {
   courseId: string;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const formSchema = z.object({
   url: z.string().min(1),
 });

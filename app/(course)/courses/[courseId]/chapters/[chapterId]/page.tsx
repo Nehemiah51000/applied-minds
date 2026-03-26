@@ -28,6 +28,7 @@ async function ChapterIdPage({
       courseId,
     });
 
+  console.log(nextChapter);
   if (!courseId || !chapter) {
     return redirect('/');
   }

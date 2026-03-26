@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 import toast from 'react-hot-toast';
 import { useConfettiStore } from '@/hooks/useConfettiStore';
 
-import { CheckCircle, Loader2, XCircle } from 'lucide-react';
+import { CheckCircle, XCircle } from 'lucide-react';
 
 import { Button } from '@/components/ui/button';
 
@@ -28,6 +28,8 @@ function CourseProgressButton({
   const [isLoading, setIsLoading] = useState(false);
   const Icon = isComplete ? XCircle : CheckCircle;
 
+  console.log(nextChapterId);
+
   const handleClick = async () => {
     try {
       setIsLoading(true);
@@ -39,7 +41,7 @@ function CourseProgressButton({
         },
       );
 
-      if (!isComplete && !nextChapterId) {
+      if (isComplete && !nextChapterId) {
         confetti.onOpen();
       }
       if (!isComplete && nextChapterId) {
@@ -47,7 +49,7 @@ function CourseProgressButton({
       }
 
       toast.success(
-        `Chapter marked as ${isComplete ? 'completed' : 'uncompleted'}`,
+        `Chapter marked as ${!isComplete ? 'completed' : 'uncompleted'}`,
       );
       router.refresh();
     } catch {
