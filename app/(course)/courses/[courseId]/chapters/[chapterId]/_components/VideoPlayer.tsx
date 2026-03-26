@@ -3,10 +3,10 @@
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import MuxPlayer from '@mux/mux-player-react';
+import { useState } from 'react';
 import toast from 'react-hot-toast';
 import { useConfettiStore } from '@/hooks/useConfettiStore';
-
-import { Lock } from 'lucide-react';
+import { Lock, Loader2 } from 'lucide-react';
 
 interface IVideoPlayerProps {
   chapterId: string;
@@ -27,6 +27,7 @@ function VideoPlayer({
   completeOnEnd,
   isLocked,
 }: IVideoPlayerProps) {
+  const [isReady, setIsReady] = useState(false);
   const router = useRouter();
   const confetti = useConfettiStore();
 
@@ -40,13 +41,12 @@ function VideoPlayer({
           },
         );
 
-        if (!nextChapterId) {
-          toast.success('You have successfully completed this course');
-          router.refresh();
-          confetti.onOpen();
-        }
+        router.refresh();
 
-        if (nextChapterId) {
+        if (!nextChapterId) {
+          confetti.onOpen();
+          toast.success('You have successfully completed this course');
+        } else {
           toast.success('You have successfully completed this chapter');
           router.push(`/courses/${courseId}/chapters/${nextChapterId}`);
         }
@@ -58,16 +58,26 @@ function VideoPlayer({
 
   if (isLocked) {
     return (
-      <div className='aspect-video flex items-center justify-center bg-slate-800 rounded-lg'>
-        <Lock className='h-10 w-10 text-white' />
+      <div className='relative aspect-video flex items-center justify-center bg-slate-800 rounded-md'>
+        <div className='flex flex-col items-center gap-y-2 text-white'>
+          <Lock className='h-8 w-8' />
+          <p className='text-sm'>This chapter is locked</p>
+        </div>
       </div>
     );
   }
 
   return (
-    <div className='aspect-video'>
+    <div className='relative aspect-video bg-slate-900 rounded-md overflow-hidden'>
+      {!isReady && (
+        <div className='absolute inset-0 flex items-center justify-center bg-slate-800'>
+          <Loader2 className='h-8 w-8 animate-spin text-white' />
+        </div>
+      )}
       <MuxPlayer
         title={title}
+        className={`w-full h-full ${!isReady ? 'hidden' : ''}`}
+        onCanPlay={() => setIsReady(true)}
         onEnded={handleOnEnd}
         autoPlay
         playbackId={playbackId}
