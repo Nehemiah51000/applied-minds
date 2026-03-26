@@ -28,12 +28,16 @@ function VideoPlayer({
   isLocked,
 }: IVideoPlayerProps) {
   const [isReady, setIsReady] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+
   const router = useRouter();
   const confetti = useConfettiStore();
 
   async function handleOnEnd() {
     try {
       if (completeOnEnd) {
+        setIsLoading(true);
+
         await axios.put(
           `/api/courses/${courseId}/chapters/${chapterId}/progress`,
           {
@@ -41,18 +45,21 @@ function VideoPlayer({
           },
         );
 
-        router.refresh();
-
         if (!nextChapterId) {
-          confetti.onOpen();
           toast.success('You have successfully completed this course');
+          router.refresh();
+          confetti.onOpen();
         } else {
-          toast.success('You have successfully completed this chapter');
-          router.push(`/courses/${courseId}/chapters/${nextChapterId}`);
+          toast.success('Moving to the next chapter...');
+          window.location.assign(
+            `/courses/${courseId}/chapters/${nextChapterId}`,
+          );
         }
       }
     } catch {
       toast.error('Something went wrong');
+    } finally {
+      setIsLoading(false);
     }
   }
 
@@ -69,8 +76,8 @@ function VideoPlayer({
 
   return (
     <div className='relative aspect-video bg-slate-900 rounded-md overflow-hidden'>
-      {!isReady && (
-        <div className='absolute inset-0 flex items-center justify-center bg-slate-800'>
+      {(!isReady || isLoading) && (
+        <div className='absolute inset-0 flex items-center justify-center bg-slate-800 z-10'>
           <Loader2 className='h-8 w-8 animate-spin text-white' />
         </div>
       )}
