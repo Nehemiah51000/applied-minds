@@ -1,16 +1,17 @@
 import { db } from '@/lib/db';
 import { auth } from '@clerk/nextjs/server';
 import { redirect } from 'next/navigation';
+import { Suspense } from 'react';
 
 import SearchInput from '@/components/SearchInput';
 import Categories from './_components/Categories';
 import CoursesWrapper from './_components/CoursesWrapper';
 
 interface ISearchPageProps {
-  searchParams: {
+  searchParams: Promise<{
     title?: string;
     categoryId?: string;
-  };
+  }>;
 }
 
 async function SearchPage({ searchParams }: ISearchPageProps) {
@@ -26,14 +27,21 @@ async function SearchPage({ searchParams }: ISearchPageProps) {
     },
   });
 
+  const resolvedSearchParams = await searchParams;
+
   return (
     <>
-      <div className='p-6 md:hidden  md:mb-0 block'>
-        <SearchInput />
+      <div className='p-6 md:hidden md:mb-0 block'>
+        <Suspense
+          fallback={
+            <div className='h-10 w-full bg-slate-100 animate-pulse rounded-md' />
+          }>
+          <SearchInput />
+        </Suspense>
       </div>
       <div className='p-6 space-y-4'>
         <Categories items={categories} />
-        <CoursesWrapper userId={userId} searchParams={searchParams} />
+        <CoursesWrapper userId={userId} searchParams={resolvedSearchParams} />
       </div>
     </>
   );
