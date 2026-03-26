@@ -4,6 +4,7 @@ import { usePathname } from 'next/navigation';
 import Link from 'next/link';
 import { ClerkLoaded, useAuth, UserButton } from '@clerk/nextjs';
 import { LogOut } from 'lucide-react';
+import { Suspense } from 'react'; // 1. Import Suspense
 
 import { Button } from './ui/button';
 import SearchInput from './SearchInput';
@@ -21,7 +22,13 @@ function NavBarRoutes() {
     <>
       {isSearchPage && (
         <div className='hidden md:block'>
-          <SearchInput />
+          {/* 2. Wrap SearchInput in Suspense */}
+          <Suspense
+            fallback={
+              <div className='h-10 w-[300px] bg-slate-100 animate-pulse rounded-md' />
+            }>
+            <SearchInput />
+          </Suspense>
         </div>
       )}
       <div className='flex gap-x-2 ml-auto'>
