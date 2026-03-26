@@ -2,14 +2,16 @@
 
 import { usePathname } from 'next/navigation';
 import Link from 'next/link';
-import { ClerkLoaded, UserButton } from '@clerk/nextjs';
+import { ClerkLoaded, useAuth, UserButton } from '@clerk/nextjs';
 import { LogOut } from 'lucide-react';
 
 import { Button } from './ui/button';
 import SearchInput from './SearchInput';
+import { isTeacher } from '@/lib/teacher';
 
 function NavBarRoutes() {
   const pathname = usePathname();
+  const { userId } = useAuth();
 
   const isTeacherPage = pathname?.startsWith('/teacher');
   const isCoursePage = pathname?.startsWith('/courses');
@@ -30,13 +32,13 @@ function NavBarRoutes() {
               Exit
             </Button>
           </Link>
-        ) : (
+        ) : isTeacher(userId || undefined) ? (
           <Link href='/teacher/courses'>
             <Button size='sm' variant='ghost'>
               Teacher mode
             </Button>
           </Link>
-        )}
+        ) : null}
         <ClerkLoaded>
           {typeof window !== 'undefined' && <UserButton afterSignOutUrl='/' />}
         </ClerkLoaded>
