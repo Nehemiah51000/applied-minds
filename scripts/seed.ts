@@ -1,13 +1,30 @@
 import 'dotenv/config';
-import { Chapter, Course } from '../app/generated/prisma/client.js';
 import { db } from '@/lib/db.js';
-// import { randomUUID } from 'crypto';
+
+// We'll use the types directly from the generated client
 
 const userId = `${process.env.NEXT_PUBLIC_TEACHER_ID}`;
 
-const courseImages = [
-  'https://res.cloudinary.com/dau0znlmo/image/upload/v1774506383/courseImage/qpx9dzekqn4akxnmty6h.jpg',
-];
+// Mapping categories to their specific Cloudinary images
+const categoryImageMap: { [key: string]: string } = {
+  'Computer Science':
+    'https://res.cloudinary.com/dau0znlmo/image/upload/v1774506383/courseImage/qpx9dzekqn4akxnmty6h.jpg',
+  Music:
+    'https://res.cloudinary.com/dau0znlmo/image/upload/v1774530379/music_uukppz.jpg',
+  Fitness:
+    'https://res.cloudinary.com/dau0znlmo/image/upload/v1774530378/fitness_wudnxd.jpg',
+  Photography:
+    'https://res.cloudinary.com/dau0znlmo/image/upload/v1774530377/photography_tlsmz1.jpg',
+  Accounting:
+    'https://res.cloudinary.com/dau0znlmo/image/upload/v1774530373/finance_j0phhq.jpg',
+  Engineering:
+    'https://res.cloudinary.com/dau0znlmo/image/upload/v1774530377/engineering_u9z7rp.jpg',
+  'Filming & Editing':
+    'https://res.cloudinary.com/dau0znlmo/image/upload/v1774530376/film-and-editing_wyqzba.jpg',
+};
+
+const fallbackImage =
+  'https://res.cloudinary.com/dau0znlmo/image/upload/v1774506383/courseImage/qpx9dzekqn4akxnmty6h.jpg';
 
 const attachmentLinks = [
   'https://res.cloudinary.com/dau0znlmo/raw/upload/v1774507136/courseAttachment/rku4kbbv7ya1klklrdpy.png',
@@ -15,30 +32,34 @@ const attachmentLinks = [
 ];
 
 async function main() {
-  await db.category.createMany({
-    data: [
-      { name: 'Computer Science' },
-      { name: 'Music' },
-      { name: 'Fitness' },
-      { name: 'Photography' },
-      { name: 'Accounting' },
-      { name: 'Engineering' },
-      { name: 'Filming & Editing' },
-    ],
-    skipDuplicates: true,
-  });
+  console.log('Seeding categories...');
+
+  const categoryNames = Object.keys(categoryImageMap);
+
+  // Ensure all categories exist
+  for (const name of categoryNames) {
+    await db.category.upsert({
+      where: { name },
+      update: {},
+      create: { name },
+    });
+  }
 
   const allCategories = await db.category.findMany();
 
-  const courses: Course[] = [];
+  console.log('Seeding courses...');
+
   for (let i = 0; i < 10; i++) {
     const category = allCategories[i % allCategories.length];
+
+    // Select image based on category name, or use fallback
+    const selectedImage = categoryImageMap[category.name] || fallbackImage;
 
     const course = await db.course.create({
       data: {
         title: `Course ${i + 1} - ${category.name}`,
         description: `This is a detailed description for Course ${i + 1} in ${category.name}.`,
-        imageUrl: courseImages[0],
+        imageUrl: selectedImage,
         isPublished: true,
         categoryId: category.id,
         userId,
@@ -46,7 +67,6 @@ async function main() {
     });
 
     const numChapters = 8 + Math.floor(Math.random() * 3); // 8–10 chapters
-    const chapters: Chapter[] = [];
 
     for (let j = 0; j < numChapters; j++) {
       const chapter = await db.chapter.create({
@@ -61,15 +81,14 @@ async function main() {
         },
       });
 
+      // Mux Data (Hardcoded for seed)
       await db.muxData.create({
         data: {
           chapterId: chapter.id,
-          assetId: 'hUOda7dLqJZNcEi00L8cAIOks8mv5uorfNcpF90000lZMk',
-          playbackId: 'AGWZ57DnqT02nOhUqUeInsW01YRXiGRMPEtdjOa6D9r02c',
+          assetId: 'wyj00gaU016hiV6tLxpZcEQzRW8xsX3XZsStqX6pZHyUk',
+          playbackId: 'oEczX5PKC00mQhmwmf1mE1u01ps24c01IICpF00wAWW02OnE',
         },
       });
-
-      chapters.push(chapter);
     }
 
     const numAttachments = 2 + Math.floor(Math.random() * 3); // 2–4 attachments
@@ -82,14 +101,12 @@ async function main() {
         },
       });
     }
-
-    courses.push(course);
   }
 
   console.log('Database seeded successfully');
 }
 
-void main()
+main()
   .catch((e) => {
     console.error(e);
     process.exit(1);
