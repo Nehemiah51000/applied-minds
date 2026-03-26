@@ -174,6 +174,13 @@ exports.Prisma.UserProgressScalarFieldEnum = {
   updatedAt: 'updatedAt'
 };
 
+exports.Prisma.EnrollmentScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  courseId: 'courseId',
+  createdAt: 'createdAt'
+};
+
 exports.Prisma.SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -196,7 +203,8 @@ exports.Prisma.ModelName = {
   Attachment: 'Attachment',
   Chapter: 'Chapter',
   MuxData: 'MuxData',
-  UserProgress: 'UserProgress'
+  UserProgress: 'UserProgress',
+  Enrollment: 'Enrollment'
 };
 
 /**
