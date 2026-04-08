@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import toast from 'react-hot-toast';
 
-import { CheckCircle, Loader2 } from 'lucide-react';
+import { CheckCircle, Loader2, XCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 interface ICourseEnrollmentButtonProps {
@@ -22,7 +22,7 @@ function CourseEnrollmentButton({
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleClick = async () => {
+  const handleEnroll = async () => {
     try {
       setIsLoading(true);
 
@@ -37,17 +37,37 @@ function CourseEnrollmentButton({
     }
   };
 
-  if (isEnrolled) return null;
+  const handleUnenroll = async () => {
+    try {
+      setIsLoading(true);
+
+      await axios.delete(
+        `/api/courses/${courseId}/chapters/${chapterId}/unenroll`,
+      );
+
+      toast.success('Successfully unenrolled');
+      router.refresh();
+    } catch {
+      toast.error('Something went wrong');
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   return (
     <Button
       type='button'
-      variant='success'
+      variant={isEnrolled ? 'destructive' : 'success'}
       disabled={isLoading}
       className='w-full md:w-auto'
-      onClick={handleClick}>
+      onClick={isEnrolled ? handleUnenroll : handleEnroll}>
       {isLoading ? (
         <Loader2 className='h-4 w-4 animate-spin' />
+      ) : isEnrolled ? (
+        <>
+          Unenroll
+          <XCircle className='h-4 w-4 ml-2' />
+        </>
       ) : (
         <>
           Enroll in Course
