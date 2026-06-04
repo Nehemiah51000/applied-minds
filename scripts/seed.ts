@@ -5,7 +5,7 @@ const userId = `${process.env.NEXT_PUBLIC_TEACHER_ID}`;
 
 const categoryImageMap: { [key: string]: string } = {
   'Computer Science':
-    'https://res.cloudinary.com/dau0znlmo/image/upload/v1774506383/courseImage/qpx9dzekqn4akxnmty6h.jpg',
+    'https://res.cloudinary.com/dau0znlmo/image/upload/v1780564909/computer-science_ynjdlc.jpg',
   Music:
     'https://res.cloudinary.com/dau0znlmo/image/upload/v1774530379/music_uukppz.jpg',
   Fitness:
