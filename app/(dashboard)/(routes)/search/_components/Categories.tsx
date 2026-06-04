@@ -23,9 +23,10 @@ function Categories({ items }: ICategoriesProps) {
     Fitness: FcSportsMode,
     Accounting: FcSalesPerformance,
     'Computer Science': FcMultipleDevices,
-    Filming: FcFilmReel,
+    'Filming & Editing': FcFilmReel,
     Engineering: FcEngineering,
   };
+
   return (
     <div className='flex items-center gap-x-2 overflow-x-auto pb-2'>
       {items.map((item) => (
